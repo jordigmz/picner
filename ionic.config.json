@@ -1,0 +1,7 @@
+{
+  "name": "picner",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
