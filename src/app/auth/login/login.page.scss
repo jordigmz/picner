@@ -6,6 +6,16 @@
   height: 270px;
   width: 100%;
 }
+@media (min-width: 1024px) {
+  #logoBrand {
+    height: 440px;
+  }
+}
+@media (min-width: 1680px) {
+  #logoBrand {
+    height: 560px;
+  }
+}
 
 @media (prefers-color-scheme: dark) {
   #logoBrand {
