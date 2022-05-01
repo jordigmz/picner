@@ -1,0 +1,29 @@
+#logoBrand {
+  background-image: url('/assets/img/logo-brand-light.png');
+  background-position:center center;
+  background-repeat:no-repeat;
+  background-size: 100%;
+  height: 180px;
+  width: 100%;
+}
+@media (max-width: 380px) {
+  #logoBrand {
+    height: 120px;
+  }
+}
+@media (min-width: 1024px) and (min-height: 601px) {
+  #logoBrand {
+    height: 400px;
+  }
+}
+@media (min-width: 1680px) {
+  #logoBrand {
+    height: 520px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  #logoBrand {
+    background-image: url('/assets/img/logo-brand-dark.png');
+  }
+}

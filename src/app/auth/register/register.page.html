@@ -1,9 +1,86 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
+<ion-content class="ion-padding">
+  <div id="logoBrand"></div>
+  <form #registerForm="ngForm" (ngSubmit)="register()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input name="name" required [(ngModel)]="user.name" #nameModel="ngModel"></ion-input>
+        <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="nameModel.dirty && nameModel.valid">
+        </ion-icon>
+      </ion-item>
+      <div ngModelGroup="mailGroup" #mailGroupModel="ngModelGroup" appEqualMail="email, email2">
+        <ion-item>
+          <ion-label position="floating">Correo electrónico</ion-label>
+          <ion-input type="text" name="email" required [(ngModel)]="user.email" #emailModel="ngModel"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder=" @"></ion-input>
+          <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="emailModel.dirty && emailModel.valid">
+          </ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Confirmar correo</ion-label>
+          <ion-input type="text" name="email2" required [(ngModel)]="email2" #email2Model="ngModel"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder=" @"></ion-input>
+          <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="email2Model.dirty && email2Model.valid">
+          </ion-icon>
+        </ion-item>
+      </div>
+      <ion-item>
+        <ion-label position="floating">Usuario</ion-label>
+        <ion-input name="username" required [(ngModel)]="user.username" #usernameModel="ngModel" pattern="[a-zA-Z0-9._-]+$"></ion-input>
+        <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="usernameModel.dirty && usernameModel.valid">
+        </ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" name="password" minlength="4" required [(ngModel)]="user.password"
+          #passModel="ngModel"></ion-input>
+        <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="passModel.dirty && passModel.valid">
+        </ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label position="inset">Foto de perfil</ion-label>
+        <ion-button color="secondary" (click)="takePhoto()">
+          <ion-icon style="font-size: 14px;" name="camera" slot="start"></ion-icon>
+          Cámara
+        </ion-button>
+        <ion-button color="tertiary" (click)="pickFromGallery()">
+          <ion-icon style="font-size: 14px;" name="images" slot="start"></ion-icon>
+          Galería
+        </ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Latitud</ion-label>
+        <ion-input type="text" name="latitude" required [(ngModel)]="user.lat" #latModel="ngModel" readonly>
+        </ion-input>
+        <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="latModel.dirty && latModel.valid">
+        </ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Longitud</ion-label>
+        <ion-input type="text" name="longitude" required [(ngModel)]="user.lng" #lngModel="ngModel" readonly>
+        </ion-input>
+        <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="lngModel.dirty && lngModel.valid">
+        </ion-icon>
+      </ion-item>
+    </ion-list>
+    <ion-img [src]="user.avatar" *ngIf="user.avatar"></ion-img>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="success" expand="block" [disabled]="registerForm.invalid || !user.avatar">
+            <ion-icon name="person-add-outline" slot="start"></ion-icon>
+            Registrarse
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button color="primary" expand="block" [routerLink]="['/auth/login']"
+            [routerDirection]="'root'">
+            <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+            Volver al inicio de sesión
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>
+
