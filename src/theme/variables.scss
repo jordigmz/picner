@@ -1,6 +1,19 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/assets/fonts/Montserrat-Regular.ttf');
+}
+*{
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+ion-button {
+  --border-radius: 20px;
+  font-weight: bold;
+}
+
 /** Ionic CSS Variables **/
 :root {
   /** primary **/

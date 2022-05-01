@@ -1,0 +1,52 @@
+<ion-content class="ion-padding">
+  <div id="logoBrand"></div>
+  <form (ngSubmit)="login()" #loginForm="ngForm">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Correo electrónico o usuario</ion-label>
+        <ion-input type="text" name="email" required [(ngModel)]="email"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" name="password" required [(ngModel)]="password"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="primary" expand="block" [disabled]="loginForm.invalid">
+            <ion-icon name="log-in-outline" slot="start"></ion-icon>
+            Iniciar sesión
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button color="success" expand="block" [routerLink]="['/auth/register']" [routerDirection]="'root'">
+            <ion-icon name="person-add-outline" slot="start"></ion-icon>
+            Crear cuenta
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item-divider></ion-item-divider>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-margin-top">
+        <ion-col >
+          <ion-button expand="block" color="danger">
+            <ion-icon name="logo-google" slot="start"></ion-icon>
+            Iniciar sesión con Google
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button expand="block" color="primary" [disabled]="accessToken !== ''">
+            <ion-icon name="logo-facebook" slot="start"></ion-icon>
+            Iniciar sesión con Facebook
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
