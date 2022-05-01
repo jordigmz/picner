@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>areas-map</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <mgl-map [style]="'mapbox://styles/mapbox/streets-v11'" [zoom]="[15]" [center]="[lng, lat]">
+    <mgl-marker #marker [lngLat]="[lng, lat]"></mgl-marker>
+  </mgl-map>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="startNavigation()">
+      <ion-icon name="navigate"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

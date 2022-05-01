@@ -31,7 +31,12 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/theme/variables.scss", "src/global.scss"],
+            "styles": [
+              "src/theme/variables.scss",
+              "src/global.scss",
+              "./node_modules/mapbox-gl/dist/mapbox-gl.css",
+              "./node_modules/@mapbox/mapbox-gl-geocoder/lib/mapbox-gl-geocoder.css"
+            ],
             "scripts": [],
             "aot": false,
             "vendorChunk": true,
