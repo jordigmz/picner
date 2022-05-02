@@ -26,7 +26,7 @@
       </div>
       <ion-item>
         <ion-label position="floating">Usuario</ion-label>
-        <ion-input name="username" required [(ngModel)]="user.username" #usernameModel="ngModel" pattern="[a-zA-Z0-9._-]+$"></ion-input>
+        <ion-input name="username" required [(ngModel)]="user.username" #usernameModel="ngModel" pattern="[a-zA-Z0-9._-]+$" placeholder="👤"></ion-input>
         <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="usernameModel.dirty && usernameModel.valid">
         </ion-icon>
       </ion-item>
@@ -73,7 +73,7 @@
           </ion-button>
         </ion-col>
         <ion-col>
-          <ion-button color="primary" expand="block" [routerLink]="['/auth/login']"
+          <ion-button color="default" expand="block" [routerLink]="['/auth/login']"
             [routerDirection]="'root'">
             <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
             Volver al inicio de sesión
