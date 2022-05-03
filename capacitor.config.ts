@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'picner',
+  appId: 'io.picner.app',
+  appName: 'Picner',
   webDir: 'www',
   bundledWebRuntime: false
 };
