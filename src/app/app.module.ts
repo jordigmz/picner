@@ -7,6 +7,8 @@ import { NgxMapboxGlGeocoderControlModule } from 'ngx-mapbox-gl-geocoder-control
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HeaderPopoverComponent } from './components/header-popover/header-popover.component';
+import { MenuTabComponent } from './components/menu-tab/menu-tab.component';
 
 @NgModule({
   declarations: [AppComponent],

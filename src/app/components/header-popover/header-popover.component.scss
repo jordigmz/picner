@@ -1,0 +1,9 @@
+.iconPopover {
+  padding-right: 15px;
+}
+
+ion-list {
+  :last-child {
+    --border-style: none !important;
+  }
+}

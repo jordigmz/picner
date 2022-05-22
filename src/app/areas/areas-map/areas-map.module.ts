@@ -5,6 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { NgxMapboxGlGeocoderControlModule } from 'ngx-mapbox-gl-geocoder-control';
+import { HeaderPopoverComponent } from 'src/app/components/header-popover/header-popover.component';
+import { MenuTabComponent } from 'src/app/components/menu-tab/menu-tab.component';
 import { AreasMapPage } from './areas-map.page';
 
 const routes: Routes = [
@@ -23,6 +25,6 @@ const routes: Routes = [
     NgxMapboxGLModule,
     NgxMapboxGlGeocoderControlModule
   ],
-  declarations: [AreasMapPage]
+  declarations: [AreasMapPage, MenuTabComponent, HeaderPopoverComponent]
 })
 export class AreasMapPageModule {}
