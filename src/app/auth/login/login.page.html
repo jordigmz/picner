@@ -4,8 +4,7 @@
     <ion-list>
       <ion-item>
         <ion-label position="floating">Correo electrónico o usuario</ion-label>
-        <ion-input type="text" name="email" required [(ngModel)]="email"
-          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></ion-input>
+        <ion-input type="text" name="email" required [(ngModel)]="email"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Contraseña</ion-label>
@@ -28,9 +27,15 @@
           </ion-button>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row class="marginVariable">
         <ion-col>
-          <ion-item-divider></ion-item-divider>
+          <div class="hrRight"></div>
+        </ion-col>
+        <ion-col class="ion-text-center" size="2">
+          <span class="fontM">o</span>
+        </ion-col>
+        <ion-col>
+          <div class="hrLeft"></div>
         </ion-col>
       </ion-row>
       <ion-row class="ion-margin-top">

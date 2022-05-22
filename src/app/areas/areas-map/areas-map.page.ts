@@ -2,6 +2,8 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MapComponent } from 'ngx-mapbox-gl';
 import { Result } from 'ngx-mapbox-gl-geocoder-control';
 import { StartNavigation } from '@proteansoftware/capacitor-start-navigation';
+import { HeaderPopoverComponent } from 'src/app/components/header-popover/header-popover.component';
+import { PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-areas-map',
@@ -13,15 +15,21 @@ export class AreasMapPage implements OnInit, AfterViewInit {
   lat = 38.4039418;
   lng = -0.5288701;
 
-  constructor() { }
+  systemDark = window.matchMedia('(prefers-color-scheme: light)');
+  logoHeader = 'assets/icon/logo-dark.png';
+
+  constructor(private popoverCtrl: PopoverController) { }
 
   ngOnInit() {
+    if (this.systemDark.matches) {
+      this.logoHeader = 'assets/icon/logo-light.png';
+    }
   }
 
   ngAfterViewInit() {
     this.mapComp.mapLoad.subscribe(
       () => {
-        this.mapComp.mapInstance.resize(); // Necessary for full height
+        this.mapComp.mapInstance.resize(); // Necessary for full height map
       }
     );
   }
@@ -38,5 +46,18 @@ export class AreasMapPage implements OnInit, AfterViewInit {
     this.lat = result.geometry.coordinates[1];
     this.lng = result.geometry.coordinates[0];
     console.log('New address: ' + result.place_name);
-    }
+  }
+
+  async openPopover(ev: any) {
+    const popover = await this.popoverCtrl.create({
+      component: HeaderPopoverComponent,
+      cssClass: 'headerPopover',
+      event: ev,
+      translucent: true
+    });
+    await popover.present();
+
+    const { role } = await popover.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
 }
