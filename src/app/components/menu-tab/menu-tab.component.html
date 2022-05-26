@@ -1,15 +1,23 @@
-<ion-tabs>
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="map">
-      <ion-icon name="map"></ion-icon>
-    </ion-tab-button>
-
-    <ion-tab-button tab="new">
-      <ion-icon name="add-circle-outline" id="btnNewArea"></ion-icon>
-    </ion-tab-button>
-
-    <ion-tab-button tab="sos">
-      <ion-icon name="call"></ion-icon>
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
+<ion-toolbar>
+  <ion-buttons>
+    <ion-grid class="ion-text-center">
+      <ion-row>
+        <ion-col>
+          <ion-button>
+            <ion-icon slot="icon-only" name="map"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button>
+            <ion-icon slot="icon-only" name="add-circle-outline" id="btnNewArea"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button>
+            <ion-icon slot="icon-only" name="call"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-buttons>
+</ion-toolbar>

@@ -1,7 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-img [src]="logoHeader" id="logoHeader" slot="start"></ion-img>
-    <ion-icon id="avatarHeader" id="nested-button" name="person-circle" slot="end"></ion-icon>
+    <ion-buttons slot="primary">
+      <ion-button id="nested-button">
+        <ion-icon name="person-circle" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <div id="logoHeader"></div>
   </ion-toolbar>
 </ion-header>
 
@@ -13,7 +17,7 @@
   </mgl-map>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="startNavigation()">
+    <ion-fab-button (click)="startNavigation()" class="ion-text-center">
       <ion-icon name="navigate"></ion-icon>
     </ion-fab-button>
   </ion-fab>

@@ -15,15 +15,9 @@ export class AreasMapPage implements OnInit, AfterViewInit {
   lat = 38.4039418;
   lng = -0.5288701;
 
-  systemDark = window.matchMedia('(prefers-color-scheme: light)');
-  logoHeader = 'assets/icon/logo-dark.png';
-
   constructor(private popoverCtrl: PopoverController) { }
 
   ngOnInit() {
-    if (this.systemDark.matches) {
-      this.logoHeader = 'assets/icon/logo-light.png';
-    }
   }
 
   ngAfterViewInit() {

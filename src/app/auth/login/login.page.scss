@@ -1,5 +1,5 @@
 #logoBrand {
-  background-image: url('/assets/img/logo-brand-light.png');
+  background-image: url('/assets/icon/logo-brand-light.png');
   background-position:center center;
   background-repeat:no-repeat;
   background-size: 100%;
@@ -24,7 +24,7 @@
 
 @media (prefers-color-scheme: dark) {
   #logoBrand {
-    background-image: url('/assets/img/logo-brand-dark.png');
+    background-image: url('/assets/icon/logo-brand-dark.png');
   }
 }
 

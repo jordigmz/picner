@@ -5,16 +5,20 @@ mgl-map {
 
 ion-fab {
   padding-right: 10px;
-  padding-bottom: 65px;
+  padding-bottom: 30px;
 }
 
 #logoHeader {
-  padding: 5px 10px;
-  max-width: 155px;
-  max-height: 42px;
+  background-image: url('/assets/icon/logo-light.png');
+  background-position:center center;
+  background-repeat:no-repeat;
+  height: 56px;
+  width: 155px;
 }
 
-#avatarHeader {
-  font-size: 42px !important;
-  padding-right: 15px,
+@media (prefers-color-scheme: dark) {
+  #logoHeader {
+    background-image: url('/assets/icon/logo-dark.png');
+  }
 }
+
