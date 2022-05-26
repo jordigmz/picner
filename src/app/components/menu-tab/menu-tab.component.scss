@@ -1,3 +1,9 @@
-#btnNewArea {
-  transform: scale(2);
+.confirmSOS {
+  background-color: green !important;
+  color: white !important;
+}
+
+.button-has-icon-only.button-clear::part(native) {
+  padding: 0 !important;
+  font-size: 20px !important;
 }

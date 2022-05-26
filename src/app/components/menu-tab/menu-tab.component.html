@@ -3,8 +3,8 @@
     <ion-grid class="ion-text-center">
       <ion-row>
         <ion-col>
-          <ion-button>
-            <ion-icon slot="icon-only" name="map"></ion-icon>
+          <ion-button [routerLink]="['/areas']" [routerDirection]="'root'">
+            <ion-icon slot="icon-only" name="map-outline"></ion-icon>
           </ion-button>
         </ion-col>
         <ion-col>
@@ -13,8 +13,8 @@
           </ion-button>
         </ion-col>
         <ion-col>
-          <ion-button>
-            <ion-icon slot="icon-only" name="call"></ion-icon>
+          <ion-button (click)="emergencyCall()">
+            <ion-icon slot="icon-only" name="call-outline"></ion-icon>
           </ion-button>
         </ion-col>
       </ion-row>

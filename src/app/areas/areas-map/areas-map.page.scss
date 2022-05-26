@@ -22,6 +22,16 @@ ion-fab {
   }
 }
 
-#profileHeader {
-  transform: scale(1.6);
+#avatarHeader {
+  background-image: url('/assets/icon/avatarHeader-light.png');
+  background-position:center center;
+  background-repeat:no-repeat;
+  height: 32px;
+  width: 32px;
+}
+
+@media (prefers-color-scheme: dark) {
+  #avatarHeader {
+    background-image: url('/assets/icon/avatarHeader-dark.png');
+  }
 }

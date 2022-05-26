@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="primary">
+    <ion-buttons slot="secondary">
       <ion-button id="nested-button">
-        <ion-icon id="profileHeader" name="person-circle" slot="icon-only"></ion-icon>
+        <div id="avatarHeader"></div>
       </ion-button>
     </ion-buttons>
     <div id="logoHeader"></div>
@@ -16,11 +16,11 @@
     <mgl-marker #marker [lngLat]="[lng, lat]"></mgl-marker>
   </mgl-map>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <!--<ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="startNavigation()" class="ion-text-center">
       <ion-icon name="navigate"></ion-icon>
     </ion-fab-button>
-  </ion-fab>
+  </ion-fab>-->
 </ion-content>
 
 <app-menu-tab></app-menu-tab>
