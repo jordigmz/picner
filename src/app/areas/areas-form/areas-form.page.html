@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/areas']" [routerDirection]="'back'">
+        <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Nuevos datos de área</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form #areaForm="ngForm" (ngSubmit)="uploadArea()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input name="title" required [(ngModel)]="area.name" #nameModel="ngModel"></ion-input>
+        <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="nameModel.dirty && nameModel.valid">
+        </ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Descripción</ion-label>
+        <ion-input name="description" required [(ngModel)]="area.description" #descModel="ngModel"></ion-input>
+        <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="descModel.dirty && descModel.valid">
+        </ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label position="inset">Portada</ion-label>
+        <ion-button color="secondary" (click)="takePhoto()">
+          <ion-icon style="font-size: 14px;" name="camera" slot="start"></ion-icon>
+          Cámara
+        </ion-button>
+        <ion-button color="tertiary" (click)="pickFromGallery()">
+          <ion-icon style="font-size: 14px;" name="images" slot="start"></ion-icon>
+          Galería
+        </ion-button>
+      </ion-item>
+      <div>
+        <ion-item>
+          <ion-label position="floating">Latitud</ion-label>
+          <ion-input type="text" name="latitude" required [(ngModel)]="area.lat" #latModel="ngModel" readonly></ion-input>
+          <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="latModel.dirty && latModel.valid">
+          </ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Longitud</ion-label>
+          <ion-input type="text" name="longitude" required [(ngModel)]="area.lng" #lngModel="ngModel" readonly></ion-input>
+          <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="lngModel.dirty && lngModel.valid">
+          </ion-icon>
+        </ion-item>
+      </div>
+      <ion-item>
+        <ion-label position="floating">Dirección</ion-label>
+        <ion-input name="address" [(ngModel)]="area.address" #addModel="ngModel" readonly></ion-input>
+        <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="addModel.dirty && addModel.valid">
+        </ion-icon>
+      </ion-item>
+      <mgl-map [style]="'mapbox://styles/mapbox/streets-v11'" [zoom]="[15]" [center]="[area.lng, area.lat]">
+        <mgl-marker #marker [lngLat]="[area.lng, area.lat]"></mgl-marker>
+        <mgl-control mglGeocoder (result)="changePosition($area.result)">
+        </mgl-control>
+      </mgl-map>
+    </ion-list>
+    <ion-img [src]="area.image" *ngIf="area.image"></ion-img>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button color="medium" expand="block" [routerLink]="['/areas']"
+            [routerDirection]="'back'">
+            <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+            Volver al mapa
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button type="submit" color="success" expand="block" [disabled]="areaForm.invalid || !area.image">
+            <ion-icon name="paper" slot="add-circle"></ion-icon>
+            Confirmar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

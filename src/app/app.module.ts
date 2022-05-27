@@ -1,14 +1,16 @@
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { NgxMapboxGlGeocoderControlModule } from 'ngx-mapbox-gl-geocoder-control';
-import { environment } from 'src/environments/environment';
+import { secretConstants } from 'src/secret';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderPopoverComponent } from './components/header-popover/header-popover.component';
-import { MenuTabComponent } from './components/menu-tab/menu-tab.component';
+import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
+import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
+import { EqualMailDirective } from './validators/equal-mail/equal-mail.directive';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,11 +20,26 @@ import { MenuTabComponent } from './components/menu-tab/menu-tab.component';
     IonicModule.forRoot(),
     AppRoutingModule,
     NgxMapboxGLModule.withConfig({
-      accessToken: environment.mapboxToken
+      accessToken: secretConstants.mapboxToken
     }),
     NgxMapboxGlGeocoderControlModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    {
+      provide: RouteReuseStrategy,
+      useClass: IonicRouteStrategy
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: BaseUrlInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthTokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -3,8 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: ''
+    path: 'me',
+    loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
+  },
+  {
+    path: ':id',
+    loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
   }
+
 ];
 
 @NgModule({
