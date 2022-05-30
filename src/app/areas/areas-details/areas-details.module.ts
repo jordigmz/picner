@@ -1,16 +1,24 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { AreasDetailsPage } from './areas-details.page';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: AreasDetailsPage
+  }
+];
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule
+    RouterModule.forChild(routes)
   ],
   declarations: [AreasDetailsPage]
 })

@@ -57,8 +57,8 @@
       </ion-item>
       <mgl-map [style]="'mapbox://styles/mapbox/streets-v11'" [zoom]="[15]" [center]="[area.lng, area.lat]">
         <mgl-marker #marker [lngLat]="[area.lng, area.lat]"></mgl-marker>
-        <mgl-control mglGeocoder (result)="changePosition($area.result)">
-        </mgl-control>
+        <!--<mgl-control mglGeocoder (result)="changePosition($area.result)">
+        </mgl-control>-->
       </mgl-map>
     </ion-list>
     <ion-img [src]="area.image" *ngIf="area.image"></ion-img>
