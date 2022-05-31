@@ -10,7 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthTokenInterceptor } from './interceptors/auth-token.interceptor';
 import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
-import { EqualMailDirective } from './validators/equal-mail/equal-mail.directive';
 
 @NgModule({
   declarations: [AppComponent],

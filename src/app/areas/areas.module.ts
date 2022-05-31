@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -12,9 +11,9 @@ import { AreasRoutingModule } from './areas-routing.module';
     CommonModule,
     FormsModule,
     IonicModule,
+    AreasRoutingModule,
     NgxMapboxGLModule,
-    NgxMapboxGlGeocoderControlModule,
-    AreasRoutingModule
+    NgxMapboxGlGeocoderControlModule
   ],
   declarations: [],
 })

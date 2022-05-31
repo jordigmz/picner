@@ -5,7 +5,7 @@
         <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Nuevos datos de área</ion-title>
+    <ion-title>Crear una nueva área</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -57,15 +57,15 @@
       </ion-item>
       <mgl-map [style]="'mapbox://styles/mapbox/streets-v11'" [zoom]="[15]" [center]="[area.lng, area.lat]">
         <mgl-marker #marker [lngLat]="[area.lng, area.lat]"></mgl-marker>
-        <!--<mgl-control mglGeocoder (result)="changePosition($area.result)">
-        </mgl-control>-->
+        <mgl-control mglGeocoder (result)="changePosition($event.result)">
+        </mgl-control>
       </mgl-map>
     </ion-list>
     <ion-img [src]="area.image" *ngIf="area.image"></ion-img>
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-button color="medium" expand="block" [routerLink]="['/areas']"
+          <ion-button color="light" expand="block" [routerLink]="['/areas']"
             [routerDirection]="'back'">
             <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
             Volver al mapa

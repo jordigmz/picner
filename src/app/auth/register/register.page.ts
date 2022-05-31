@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Camera, CameraSource, CameraResultType } from '@capacitor/camera';
+import { ToastController, NavController, AlertController } from '@ionic/angular';
+import { User } from 'src/app/users/interfaces/user';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -6,32 +11,95 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-  user = {
+  user: User = {
     username: '',
     name: '',
     password: '',
     email: '',
     avatar: '',
     lat: 0,
-    lng: 0
+    lng: 0,
   };
   email2 = '';
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private toast: ToastController,
+    private router: Router,
+    private alertCtrl: AlertController
+  ) {}
 
   ngOnInit() {
+    this.resetForm();
+
+    navigator.geolocation.getCurrentPosition((pos) => {
+      this.user.lat = pos.coords.latitude;
+      this.user.lng = pos.coords.longitude;
+    });
+  }
+
+  resetForm() {
+    this.user = {
+      username: '',
+      name: '',
+      password: '',
+      email: '',
+      avatar: '',
+      lat: 0,
+      lng: 0,
+    };
+    this.email2 = '';
   }
 
   register() {
-
+    this.authService.register(this.user).subscribe(async () => {
+      (
+        await this.toast.create({
+          duration: 5000,
+          position: 'bottom',
+          color: 'success',
+          message: 'Usuario registrado!',
+          icon: 'information-circle',
+        })
+      ).present();
+      this.authService.login(this.user.username, this.user.password).subscribe(
+        () => this.router.navigate(['/areas']),
+        async (error) => {
+          (
+            await this.alertCtrl.create({
+              header: 'Fallo en el inicio de sesión',
+              message:
+                'Ooops! Algo salió mal. Por favor, inténtelo de nuevo.',
+              buttons: ['Aceptar'],
+            })
+          ).present();
+        }
+      );
+    });
   }
 
-  takePhoto() {
+  async takePhoto() {
+    const photo = await Camera.getPhoto({
+      source: CameraSource.Camera,
+      quality: 90,
+      height: 400,
+      width: 400,
+      allowEditing: true,
+      resultType: CameraResultType.DataUrl,
+    });
 
+    this.user.avatar = photo.dataUrl;
   }
 
-  pickFromGallery() {
+  async pickFromGallery() {
+    const photo = await Camera.getPhoto({
+      source: CameraSource.Photos,
+      height: 400,
+      width: 400,
+      allowEditing: true,
+      resultType: CameraResultType.DataUrl,
+    });
 
+    this.user.avatar = photo.dataUrl;
   }
-
 }

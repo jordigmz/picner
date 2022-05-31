@@ -12,7 +12,7 @@ export class AuthTokenInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    return from(Storage.get({ key: 'fs-token' })).pipe(
+    return from(Storage.get({ key: 'token' })).pipe(
       switchMap((token) => {
         if (!token.value) {
           throw new Error();

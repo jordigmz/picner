@@ -14,21 +14,17 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(
-    email: string,
-    password: string,
-    firebaseToken: string
-  ): Observable<void> {
+  login(username: string, password: string): Observable<void> {
     return this.http
       .post<{ accessToken: string }>('auth/login', {
-        email,
+        username,
         password,
-        firebaseToken,
       })
       .pipe(
         switchMap(async (r) => {
           try {
-            await Storage.set({ key: 'fs-token', value: r.accessToken });
+            await Storage.set({ key: 'token', value: r.accessToken });
+            this.setLogged(true);
           } catch (e) {
             throw new Error('Cannot save authentication token in storage!');
           }
@@ -41,7 +37,7 @@ export class AuthService {
   }
 
   async logout(): Promise<void> {
-    await Storage.remove({ key: 'fs-token' });
+    await Storage.remove({ key: 'token' });
     this.setLogged(false);
   }
 
@@ -49,7 +45,7 @@ export class AuthService {
     if (this.logged) {
       return of(true);
     }
-    return from(Storage.get({ key: 'fs-token' })).pipe(
+    return from(Storage.get({ key: 'token' })).pipe(
       switchMap((token) => {
         if (!token.value) {
           throw new Error();
