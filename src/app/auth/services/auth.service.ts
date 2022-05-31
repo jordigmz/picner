@@ -11,6 +11,7 @@ import { User } from 'src/app/users/interfaces/user';
 export class AuthService {
   logged = false;
   loginChange$ = new ReplaySubject<boolean>(1);
+  userLogged: User;
 
   constructor(private http: HttpClient) {}
 

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Camera, CameraSource, CameraResultType } from '@capacitor/camera';
-import { ToastController, NavController, AlertController } from '@ionic/angular';
+import {
+  ToastController,
+  NavController,
+  AlertController,
+} from '@ionic/angular';
 import { User } from 'src/app/users/interfaces/user';
 import { AuthService } from '../services/auth.service';
 
@@ -55,10 +59,10 @@ export class RegisterPage implements OnInit {
     this.authService.register(this.user).subscribe(async () => {
       (
         await this.toast.create({
-          duration: 5000,
+          duration: 3000,
           position: 'bottom',
           color: 'success',
-          message: 'Usuario registrado!',
+          message: `Bienvenid@ ${this.user.name}!`,
           icon: 'information-circle',
         })
       ).present();
@@ -68,8 +72,7 @@ export class RegisterPage implements OnInit {
           (
             await this.alertCtrl.create({
               header: 'Fallo en el inicio de sesión',
-              message:
-                'Ooops! Algo salió mal. Por favor, inténtelo de nuevo.',
+              message: 'Ooops! Algo salió mal. Por favor, inténtelo de nuevo.',
               buttons: ['Aceptar'],
             })
           ).present();

@@ -3,10 +3,12 @@ import { MapComponent } from 'ngx-mapbox-gl';
 import { Result } from 'ngx-mapbox-gl-geocoder-control';
 import { StartNavigation } from '@proteansoftware/capacitor-start-navigation';
 import { HeaderPopoverComponent } from 'src/app/components/header-popover/header-popover.component';
-import { AlertController, PopoverController } from '@ionic/angular';
+import { AlertController, PopoverController, ToastController } from '@ionic/angular';
 import { AreasService } from '../services/areas.service';
 import { Area } from '../interfaces/areas';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { User } from 'src/app/users/interfaces/user';
+import { UsersService } from 'src/app/users/services/users.service';
 
 @Component({
   selector: 'app-areas-map',
@@ -18,11 +20,24 @@ export class AreasMapPage implements OnInit, AfterViewInit {
   lat = 38.4039418;
   lng = -0.5288701;
 
+  user: User = {
+    name: '',
+    username: '',
+    email: '',
+    password: '',
+    avatar: '',
+    lat: 38.4039418,
+    lng: -0.5288701,
+  };
+
   areas: Area[] = [];
 
   constructor(
     private popoverCtrl: PopoverController,
-    private areasService: AreasService
+    private areasService: AreasService,
+    private authService: AuthService,
+    private usersService: UsersService,
+    private toast: ToastController
   ) { }
 
   ngOnInit() {
@@ -34,6 +49,10 @@ export class AreasMapPage implements OnInit, AfterViewInit {
         this.mapComp.mapInstance.resize(); // Necessary for full height map
       }
     );
+
+    this.usersService.getUser().subscribe((user) => {
+      this.user = user;
+    });
   }
 
   ionViewWillEnter() {

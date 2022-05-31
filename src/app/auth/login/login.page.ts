@@ -31,8 +31,8 @@ export class LoginPage implements OnInit {
         async (error) => {
           (
             await this.alertCtrl.create({
-              header: 'Fallo en el inicio de sesión',
-              message: 'Los datos introducidos no son correctos. Por favor, compruébelos.',
+              header: 'No podemos iniciar sesión en tu cuenta',
+              message: 'Los datos introducidos no son correctos. Por favor, compruébalos.',
               buttons: ['Aceptar'],
             })
           ).present();

@@ -7,10 +7,7 @@
             <ion-icon slot="icon-only" name="map-outline"></ion-icon>
           </ion-button>
         </ion-col>
-        <ion-col>
-          <ion-button [routerLink]="['/areas/add']" [routerDirection]="'root'">
-            <ion-icon slot="icon-only" name="add-circle-outline" id="btnNewArea"></ion-icon>
-          </ion-button>
+        <ion-col class="ion-no-padding">
         </ion-col>
         <ion-col>
           <ion-button (click)="emergencyCall()">
@@ -21,3 +18,8 @@
     </ion-grid>
   </ion-buttons>
 </ion-toolbar>
+<ion-fab vertical="bottom" horizontal="center" slot="fixed">
+  <ion-fab-button [routerLink]="['/areas/add']" [routerDirection]="'root'">
+    <ion-icon name="add-sharp" id="btnNewArea"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
