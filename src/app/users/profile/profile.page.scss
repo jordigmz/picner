@@ -1,0 +1,42 @@
+mgl-map {
+  height: 300px;
+  width: 100%;
+}
+
+.avatarProfile {
+  width: 100%;
+  border-radius: 100%;
+  padding: 15px;
+}
+
+ion-card-title {
+  font-size: 32px;
+}
+
+ion-card-subtitle {
+  font-size: 18px;
+}
+
+:host ::ng-deep .mapboxgl-popup-close-button,
+:host ::ng-deep .mapboxgl-popup-close-button:focus,
+:host ::ng-deep .mapboxgl-popup-close-button:active,
+:host ::ng-deep .mapboxgl-popup-close-button:link,
+:host ::ng-deep .mapboxgl-popup-close-button:visited {
+  color: black !important;
+  border: none !important;
+  font-size: 24px;
+  text-decoration: none !important;
+  outline: none !important;
+}
+
+:host ::ng-deep .mapboxgl-popup-content {
+  height: max-content;
+  border: 2px solid #cdcdcd;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 10px;
+  margin-bottom: 2px !important;
+  padding-top: 10px !important;
+  padding-right: 30px !important;
+  font-size: 16px !important;
+  color: black;
+}

@@ -2,11 +2,11 @@
   <ng-template>
     <ion-content>
       <ion-list>
-        <ion-item [button]="true" [detail]="false">
+        <ion-item [button]="true" [detail]="false" [routerLink]="['/users/me']" [routerDirection]="'forward'">
           <ion-label><ion-icon name="person-outline" class="iconPopover"></ion-icon>Mi perfil</ion-label>
         </ion-item>
         <ion-item [button]="true" [detail]="false">
-          <ion-label><ion-icon name="star-outline" class="iconPopover"></ion-icon>Favoritos</ion-label>
+          <ion-label><ion-icon name="settings-outline" class="iconPopover"></ion-icon>Ajustes</ion-label>
         </ion-item>
         <ion-item [button]="true" [detail]="false" (click)="logout()">
           <ion-label><ion-icon name="exit-outline" color="danger" class="iconPopover"></ion-icon>Cerrar sesión</ion-label>

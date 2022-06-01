@@ -1,9 +1,47 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/areas']" [routerDirection]="'back'">
+        <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Información de la cuenta</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-card *ngIf="user">
+    <div class="ion-padding-top" *ngIf="user.me">
+      <ion-label class="ion-padding-start">Cambiar foto del perfil</ion-label>
+      <ion-item class="">
+        <ion-button color="secondary" (click)="takePhoto()">
+          <ion-icon style="font-size: 14px;" name="camera" slot="start"></ion-icon>
+          Cámara
+        </ion-button>
+        <ion-button color="tertiary" (click)="pickFromGallery()">
+          <ion-icon style="font-size: 14px;" name="images" slot="start"></ion-icon>
+          Galería
+        </ion-button>
+      </ion-item>
+    </div>
+    <img class="avatarProfile" [src]="user.avatar">
+    <ion-card-content class="ion-text-center">
+      <ion-card-title>{{user.name}}</ion-card-title>
+      <ion-card-subtitle>{{user.email}}</ion-card-subtitle>
+      <ion-button *ngIf="user.me" (click)="editProfile()" expand="block" color="primary" class="ion-margin-top">
+        <ion-icon name="create-outline" slot="start"></ion-icon>
+        <ion-label>Editar Perfil</ion-label>
+      </ion-button>
+      <ion-button *ngIf="user.me" (click)="editPassword()" expand="block" color="light" class="ion-margin-top">
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-label>Cambiar contraseña</ion-label>
+      </ion-button>
+    </ion-card-content>
+    <mgl-map class="ion-margin-top" #mapComponent [style]="'mapbox://styles/mapbox/streets-v11'" [zoom]="[10]" [center]="[lng, lat]">
+      <mgl-marker #marker [lngLat]="[lng, lat]"></mgl-marker>
+      <mgl-popup [marker]="marker">
+        Última ubicación
+      </mgl-popup>
+    </mgl-map>
+  </ion-card>
 </ion-content>
