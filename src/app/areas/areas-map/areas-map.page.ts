@@ -48,7 +48,6 @@ export class AreasMapPage implements OnInit, AfterViewInit {
 
     this.areasService.getAreas().subscribe((ars) => {
       this.areas = this.areas.concat(ars);
-      console.log(this.areas);
     });
   }
 

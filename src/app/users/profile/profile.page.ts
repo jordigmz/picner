@@ -94,8 +94,8 @@ export class ProfilePage implements OnInit, AfterViewInit {
     const photo = await Camera.getPhoto({
       source: CameraSource.Camera,
       quality: 90,
-      height: 640,
-      width: 640,
+      height: 400,
+      width: 400,
       allowEditing: true,
       resultType: CameraResultType.DataUrl,
     });
@@ -109,7 +109,7 @@ export class ProfilePage implements OnInit, AfterViewInit {
           position: 'bottom',
           color: 'success',
           icon: 'information-circle',
-          message: 'Avatar changed!',
+          message: 'Foto del perfil actualizada.',
         })
       ).present();
     });
@@ -118,8 +118,8 @@ export class ProfilePage implements OnInit, AfterViewInit {
   async pickFromGallery() {
     const photo = await Camera.getPhoto({
       source: CameraSource.Photos,
-      height: 640,
-      width: 640,
+      height: 400,
+      width: 400,
       allowEditing: true,
       resultType: CameraResultType.DataUrl,
     });
@@ -133,7 +133,7 @@ export class ProfilePage implements OnInit, AfterViewInit {
           position: 'bottom',
           color: 'success',
           icon: 'information-circle',
-          message: 'Avatar changed!',
+          message: 'Foto del perfil actualizada.',
         })
       ).present();
     });

@@ -13,7 +13,7 @@
   <ion-card *ngIf="user">
     <div class="ion-padding-top" *ngIf="user.me">
       <ion-label class="ion-padding-start">Cambiar foto del perfil</ion-label>
-      <ion-item class="">
+      <ion-item  lines="none">
         <ion-button color="secondary" (click)="takePhoto()">
           <ion-icon style="font-size: 14px;" name="camera" slot="start"></ion-icon>
           Cámara
@@ -24,7 +24,9 @@
         </ion-button>
       </ion-item>
     </div>
-    <img class="avatarProfile" [src]="user.avatar">
+    <div id="divAvatar" class="ion-text-center">
+      <img class="avatarProfile" [src]="user.avatar">
+    </div>
     <ion-card-content class="ion-text-center">
       <ion-card-title>{{user.name}}</ion-card-title>
       <ion-card-subtitle>{{user.email}}</ion-card-subtitle>

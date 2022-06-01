@@ -17,7 +17,12 @@ const routes: Routes = [
   {
     path: ':id/edit',
     loadChildren: () => import('./areas-form/areas-form.module').then(m => m.AreasFormPageModule)
+  },
+  {
+    path: 'guardado',
+    loadChildren: () => import('./areas-saved/areas-saved.module').then( m => m.AreasSavedPageModule)
   }
+
 ];
 
 @NgModule({
