@@ -23,12 +23,13 @@ export class AreasFormPage implements OnInit, AfterViewInit {
     name: '',
     description: '',
     image: '',
-    lat: 0,
-    lng: 0,
-    address: ''
+    lat: 38.408131,
+    lng: -0.792284,
+    address: 'C. Novelda, Alicante'
   };
-  lat = 0;
-  lng = 0;
+  lat = 38.408131;
+  lng = -0.792284;
+
   imageName = '';
   posted = false;
 
@@ -104,7 +105,7 @@ export class AreasFormPage implements OnInit, AfterViewInit {
       image: '',
       lat: 0,
       lng: 0,
-      address: ''
+      address: 'C. Alfonso el Sabio, 29, 03660 Novelda, Alicante'
     };
     this.imageName = '';
   }

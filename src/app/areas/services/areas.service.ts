@@ -14,12 +14,12 @@ export class AreasService {
   readonly areaURL = 'areas';
   constructor(private http: HttpClient) { }
 
-  getAreas(): Observable<Area[]> {
+  getAreas(): Observable<any[]> {
     let options = {
-      headers: new HttpHeaders().set('Authoritation', 'Bearer ' + localStorage.getItem('token'))
+      headers: new HttpHeaders().set('Authoritation', 'Bearer ' + localStorage.getItem('accessToken'))
     };
-    return this.http.get<AreasResponse>(this.areaURL, options).pipe(
-      map((resp) => resp.areas),
+    return this.http.get<any>(this.areaURL, options).pipe(
+      map((resp) => resp),
       catchError((resp: HttpErrorResponse) =>
         throwError(
           () =>

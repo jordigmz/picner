@@ -9,6 +9,7 @@ import { Area } from '../interfaces/areas';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { User } from 'src/app/users/interfaces/user';
 import { UsersService } from 'src/app/users/services/users.service';
+import mapboxgl from 'mapbox-gl';
 
 @Component({
   selector: 'app-areas-map',
@@ -17,8 +18,8 @@ import { UsersService } from 'src/app/users/services/users.service';
 })
 export class AreasMapPage implements OnInit, AfterViewInit {
   @ViewChild(MapComponent) mapComp: MapComponent;
-  lat = 38.4039418;
-  lng = -0.5288701;
+  lat = 38.381783;
+  lng = -0.778259;
 
   user: User = {
     name: '',
@@ -26,8 +27,8 @@ export class AreasMapPage implements OnInit, AfterViewInit {
     email: '',
     password: '',
     avatar: '',
-    lat: 38.4039418,
-    lng: -0.5288701,
+    lat: 38.381783,
+    lng: -0.778259
   };
 
   areas: Area[] = [];
@@ -41,6 +42,14 @@ export class AreasMapPage implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
+    this.usersService.getUser().subscribe((user) => {
+      this.user = user;
+    });
+
+    this.areasService.getAreas().subscribe((ars) => {
+      this.areas = this.areas.concat(ars);
+      console.log(this.areas);
+    });
   }
 
   ngAfterViewInit() {
@@ -49,54 +58,10 @@ export class AreasMapPage implements OnInit, AfterViewInit {
         this.mapComp.mapInstance.resize(); // Necessary for full height map
       }
     );
-
-    this.usersService.getUser().subscribe((user) => {
-      this.user = user;
-    });
   }
 
-  ionViewWillEnter() {
-    /*this.areasService
-      .getAreas()
-      .subscribe((ars) => (this.areas = ars));
-
-      console.log(this.areas);*/
-    this.areas = [
-      {
-        id: '628e0dc22dc11d3037d7d3df',
-        name: 'Mi area 1',
-        description: 'Descripción del area 1',
-        image: 'imagen1.jpg',
-        lat: 3.09876,
-        lng: 0.32456,
-        address: 'Dirección del area 1',
-        visibility: 0
-      },
-      {
-        id: '628e0dd12dc11d3037d7d3e1',
-        name: 'Mi area 2',
-        description: 'Descripción del area 2',
-        image: 'imagen2.jpg',
-        lat: 3.09876,
-        lng: 0.32456,
-        address: 'Dirección del area 2',
-        visibility: 1
-      },
-  ];
-  }
-
-  startNavigation() {
-    StartNavigation.launchMapsApp({
-      latitude: this.lat,
-      longitude: this.lng,
-      name: 'Directions example',
-    });
-  }
-
-  changePosition(result: Result) {
-    this.lat = result.geometry.coordinates[1];
-    this.lng = result.geometry.coordinates[0];
-    console.log('New address: ' + result.place_name);
+  alert() {
+    alert('Foo');
   }
 
   async openPopover(ev: any) {

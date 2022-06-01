@@ -12,15 +12,11 @@
 <app-header-popover></app-header-popover>
 
 <ion-content>
-  <mgl-map [style]="'mapbox://styles/mapbox/streets-v11'" [zoom]="[15]" [center]="[lng, lat]">
-    <mgl-marker #marker [lngLat]="[lng, lat]"></mgl-marker>
+  <mgl-map [style]="'mapbox://styles/mapbox/streets-v11'" [zoom]="[15]" [center]="[user.lng, user.lat]">
+    <mgl-marker *ngFor="let area of areas" [lngLat]="[area.lng, area.lat]">
+      <div (click)="alert()" class="marker"><ion-icon name="location" color="danger" size="large"></ion-icon></div>
+    </mgl-marker>
   </mgl-map>
-
-  <!--<ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="startNavigation()" class="ion-text-center">
-      <ion-icon name="navigate"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>-->
 </ion-content>
 
 <app-menu-tab></app-menu-tab>

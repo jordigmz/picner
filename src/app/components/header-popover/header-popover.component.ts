@@ -39,7 +39,6 @@ export class HeaderPopoverComponent implements OnInit {
           handler: () => {
             console.log('Confirma cerrar sesión');
             this.authService.logout();
-            this.router.navigate(['/auth/login']);
           }
         }
       ]

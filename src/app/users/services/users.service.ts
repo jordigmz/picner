@@ -4,44 +4,36 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { UserResponse } from '../interfaces/responses/user-response';
-import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  options: {headers: HttpHeaders};
-
   constructor(private http: HttpClient) { }
 
-  getUser(id?: string): Observable<User> {
-    console.log(localStorage.getItem('token'));
+  getUser(id?: string): Observable<any> {
+    let options = {
+      headers: new HttpHeaders().set('Authoritation', 'Bearer ' + localStorage.getItem('accessToken'))
+    };
+
     if (!id) {
-      this.options = {
-        headers: new HttpHeaders().set('Authoritation', 'Bearer ' + localStorage.getItem('token'))
-      };
-      console.log(this.options);
-      return this.http.get<UserResponse>('users/me', this.options).pipe(
-        map(resp => resp.user),
+      return this.http.get<any>('users/me', options).pipe(
+        map((resp) => resp),
         catchError((resp: HttpErrorResponse) =>
           throwError(
             () =>
-              `Error getting your user. Status: ${resp.status}. Message: ${resp.message}`
+              `Error getting user. Status: ${resp.status}. Message: ${resp.message}`
           ))
       );
-    }
-    else {
-      this.options = {
-        headers: new HttpHeaders().set('Authoritation', 'Bearer ' + localStorage.getItem('token'))
-      };
-      return this.http.get<UserResponse>(`users/${id}`, this.options).pipe(
-        map(resp => resp.user),
+    } else {
+      return this.http.get<any>(`users/${id}`, options).pipe(
+        map((resp) => resp),
         catchError((resp: HttpErrorResponse) =>
-        throwError(
-          () =>
-            `Error getting user. Status: ${resp.status}. Message: ${resp.message}`
-        ))
-    );
+          throwError(
+            () =>
+              `Error getting user. Status: ${resp.status}. Message: ${resp.message}`
+          ))
+      );
     }
   }
 

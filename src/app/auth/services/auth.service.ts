@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Storage } from '@capacitor/storage';
 import { from, Observable, of, ReplaySubject } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
@@ -13,7 +14,7 @@ export class AuthService {
   loginChange$ = new ReplaySubject<boolean>(1);
   userLogged: User;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(username: string, password: string): Observable<void> {
     return this.http
@@ -24,7 +25,7 @@ export class AuthService {
       .pipe(
         switchMap(async (r) => {
           try {
-            await Storage.set({ key: 'token', value: r.accessToken });
+            await Storage.set({ key: 'accessToken', value: r.accessToken });
             this.setLogged(true);
           } catch (e) {
             throw new Error('Cannot save authentication token in storage!');
@@ -38,15 +39,16 @@ export class AuthService {
   }
 
   async logout(): Promise<void> {
-    await Storage.remove({ key: 'token' });
+    await Storage.remove({ key: 'accessToken' });
     this.setLogged(false);
+    this.router.navigate(['/auth/login']);
   }
 
   isLogged(): Observable<boolean> {
     if (this.logged) {
       return of(true);
     }
-    return from(Storage.get({ key: 'token' })).pipe(
+    return from(Storage.get({ key: 'accessToken' })).pipe(
       switchMap((token) => {
         if (!token.value) {
           throw new Error();
