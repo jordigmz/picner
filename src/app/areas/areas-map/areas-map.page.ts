@@ -1,15 +1,12 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { NavController, PopoverController } from '@ionic/angular';
 import { MapComponent } from 'ngx-mapbox-gl';
-import { Result } from 'ngx-mapbox-gl-geocoder-control';
-import { StartNavigation } from '@proteansoftware/capacitor-start-navigation';
 import { HeaderPopoverComponent } from 'src/app/components/header-popover/header-popover.component';
-import { AlertController, PopoverController, ToastController } from '@ionic/angular';
-import { AreasService } from '../services/areas.service';
-import { Area } from '../interfaces/areas';
-import { AuthService } from 'src/app/auth/services/auth.service';
 import { User } from 'src/app/users/interfaces/user';
 import { UsersService } from 'src/app/users/services/users.service';
-import mapboxgl from 'mapbox-gl';
+import { Area } from '../interfaces/areas';
+import { AreasService } from '../services/areas.service';
 
 @Component({
   selector: 'app-areas-map',
@@ -28,7 +25,7 @@ export class AreasMapPage implements OnInit, AfterViewInit {
     password: '',
     avatar: '',
     lat: 38.381783,
-    lng: -0.778259
+    lng: -0.778259,
   };
 
   areas: Area[] = [];
@@ -36,10 +33,8 @@ export class AreasMapPage implements OnInit, AfterViewInit {
   constructor(
     private popoverCtrl: PopoverController,
     private areasService: AreasService,
-    private authService: AuthService,
-    private usersService: UsersService,
-    private toast: ToastController
-  ) { }
+    private usersService: UsersService
+  ) {}
 
   ngOnInit() {
     this.usersService.getUser().subscribe((user) => {
@@ -52,15 +47,9 @@ export class AreasMapPage implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.mapComp.mapLoad.subscribe(
-      () => {
-        this.mapComp.mapInstance.resize(); // Necessary for full height map
-      }
-    );
-  }
-
-  alert() {
-    alert('Foo');
+    this.mapComp.mapLoad.subscribe(() => {
+      this.mapComp.mapInstance.resize(); // Necessary for full height map
+    });
   }
 
   async openPopover(ev: any) {
@@ -68,7 +57,7 @@ export class AreasMapPage implements OnInit, AfterViewInit {
       component: HeaderPopoverComponent,
       cssClass: 'headerPopover',
       event: ev,
-      translucent: true
+      translucent: true,
     });
     await popover.present();
 

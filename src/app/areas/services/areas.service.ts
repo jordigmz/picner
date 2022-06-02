@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable prefer-const */
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -28,9 +29,17 @@ export class AreasService {
     );
   }
 
-  getArea(id: string): Observable<Area> {
-    return this.http.get<AreaResponse>(`areas/${id}`).pipe(
-      map(resp => resp.area)
+  getArea(id: string): Observable<any> {
+    let options = {
+      headers: new HttpHeaders().set('Authoritation', 'Bearer ' + localStorage.getItem('accessToken'))
+    };
+    return this.http.get<any>(`areas/${id}`, options).pipe(
+      map((resp) => resp),
+      catchError((resp: HttpErrorResponse) =>
+        throwError(
+          () =>
+            `Error getting the area. Status: ${resp.status}. Message: ${resp.message}`
+        ))
     );
   }
 
@@ -41,7 +50,7 @@ export class AreasService {
   }
 
   editArea(area: Area): Observable<void> {
-    return this.http.put<void>(`areas/${area.id}`, area).pipe(
+    return this.http.put<void>(`areas/${area._id}`, area).pipe(
       map(resp => resp)
     );
   }

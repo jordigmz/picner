@@ -1,7 +1,7 @@
 import { User } from '../../users/interfaces/user';
 
 export interface Area {
-  id?: string;
+  _id?: string;
   name: string;
   description: string;
   image: string;
