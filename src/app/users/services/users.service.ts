@@ -1,9 +1,11 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable prefer-const */
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { UserResponse } from '../interfaces/responses/user-response';
+import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -37,15 +39,33 @@ export class UsersService {
     }
   }
 
-  editNameAndEmail(name: string, email: string): Observable<void> {
-    return this.http.put<void>('users/me', { name, email }).pipe(map(resp => resp));
+  editUser(user: User): Observable<void> {
+    return this.http.put<void>('users/me', user).pipe(map(resp => resp),
+      catchError((resp: HttpErrorResponse) =>
+        throwError(
+          () =>
+            `Error updating user. Status: ${resp.status}. Message: ${resp.message}`
+        ))
+    );
   }
 
-  editAvatar(avatar: string): Observable<void> {
-    return this.http.put<void>('users/me/photo', { avatar }).pipe(map(resp => resp));
+  editAvatar(user: User): Observable<void> {
+    return this.http.put<void>('users/me/photo', user).pipe(map(resp => resp),
+      catchError((resp: HttpErrorResponse) =>
+        throwError(
+          () =>
+            `Error updating user. Status: ${resp.status}. Message: ${resp.message}`
+        ))
+    );
   }
 
-  editPassword(password: string): Observable<void> {
-    return this.http.put<void>('users/me/password', { password }).pipe(map(resp => resp));
+  editPassword(user: User): Observable<void> {
+    return this.http.put<void>('users/me/password', user).pipe(map(resp => resp),
+      catchError((resp: HttpErrorResponse) =>
+        throwError(
+          () =>
+            `Error updating user. Status: ${resp.status}. Message: ${resp.message}`
+        ))
+    );
   }
 }

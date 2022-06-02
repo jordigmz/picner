@@ -25,7 +25,7 @@ export class NameModalComponent implements OnInit {
   }
 
   editNameAndEmail() {
-    this.usersService.editNameAndEmail(this.user.name, this.user.email).subscribe(
+    this.usersService.editUser(this.user).subscribe(
       async () => {
         (await this.toast.create({
           duration: 1200,

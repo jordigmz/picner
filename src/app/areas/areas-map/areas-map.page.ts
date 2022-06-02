@@ -15,9 +15,6 @@ import { AreasService } from '../services/areas.service';
 })
 export class AreasMapPage implements OnInit, AfterViewInit {
   @ViewChild(MapComponent) mapComp: MapComponent;
-  lat = 38.381783;
-  lng = -0.778259;
-
   user: User = {
     name: '',
     username: '',
@@ -44,6 +41,10 @@ export class AreasMapPage implements OnInit, AfterViewInit {
     this.areasService.getAreas().subscribe((ars) => {
       this.areas = this.areas.concat(ars);
     });
+  }
+
+  ionViewWillEnter() {
+
   }
 
   ngAfterViewInit() {

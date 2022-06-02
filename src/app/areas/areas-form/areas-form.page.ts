@@ -25,10 +25,8 @@ export class AreasFormPage implements OnInit, AfterViewInit {
     image: '',
     lat: 38.408131,
     lng: -0.792284,
-    address: 'C. Novelda, Alicante'
+    address: ''
   };
-  lat = 38.408131;
-  lng = -0.792284;
 
   imageName = '';
   posted = false;
@@ -105,7 +103,7 @@ export class AreasFormPage implements OnInit, AfterViewInit {
       image: '',
       lat: 0,
       lng: 0,
-      address: 'C. Alfonso el Sabio, 29, 03660 Novelda, Alicante'
+      address: 'Selecciona una ubicación en el mapa'
     };
     this.imageName = '';
   }
@@ -117,8 +115,8 @@ export class AreasFormPage implements OnInit, AfterViewInit {
           (
             await this.toastCtrl.create({
               position: 'bottom',
-              duration: 3000,
-              message: 'Area edited succesfully',
+              duration: 1200,
+              message: 'Se ha actualizado el área.',
               color: 'success',
             })
           ).present();
@@ -128,8 +126,8 @@ export class AreasFormPage implements OnInit, AfterViewInit {
           (
             await this.toastCtrl.create({
               position: 'bottom',
-              duration: 3000,
-              message: 'Error editting area',
+              duration: 1200,
+              message: 'Error editando el área.',
             })
           ).present()
       );
@@ -139,8 +137,8 @@ export class AreasFormPage implements OnInit, AfterViewInit {
           (
             await this.toastCtrl.create({
               position: 'bottom',
-              duration: 3000,
-              message: 'Area added succesfully',
+              duration: 1200,
+              message: '¡Nueva área publicada!',
               color: 'success',
             })
           ).present();
@@ -150,8 +148,8 @@ export class AreasFormPage implements OnInit, AfterViewInit {
           (
             await this.toastCtrl.create({
               position: 'bottom',
-              duration: 3000,
-              message: 'Error adding area',
+              duration: 1200,
+              message: 'Error publicando el área.',
             })
           ).present()
       );
@@ -162,8 +160,8 @@ export class AreasFormPage implements OnInit, AfterViewInit {
     const photo = await Camera.getPhoto({
       source: CameraSource.Camera,
       quality: 90,
-      height: 640,
-      width: 640,
+      height: 400,
+      width: 400,
       allowEditing: true,
       resultType: CameraResultType.DataUrl,
     });
@@ -174,8 +172,8 @@ export class AreasFormPage implements OnInit, AfterViewInit {
   async pickFromGallery() {
     const photo = await Camera.getPhoto({
       source: CameraSource.Photos,
-      height: 640,
-      width: 640,
+      height: 400,
+      width: 400,
       allowEditing: true,
       resultType: CameraResultType.DataUrl,
     });

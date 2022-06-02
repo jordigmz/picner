@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Area, AreasResponse, AreaResponse } from '../interfaces/areas';
+import { Area } from '../interfaces/areas';
 import { Comments } from '../interfaces/comments';
 
 @Injectable({
@@ -44,7 +44,7 @@ export class AreasService {
   }
 
   addArea(area: Area): Observable<Area> {
-    return this.http.post<AreaResponse>(`areas`, area).pipe(
+    return this.http.post<any>(`areas`, area).pipe(
       map(resp => resp.area)
     );
   }

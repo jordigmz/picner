@@ -35,6 +35,7 @@
           Galería
         </ion-button>
       </ion-item>
+      <ion-item *ngIf="area.image" lines="none"><ion-img [src]="area.image"></ion-img></ion-item>
       <div>
         <ion-item>
           <ion-label position="floating">Latitud</ion-label>
@@ -56,12 +57,10 @@
         </ion-icon>
       </ion-item>
       <mgl-map [style]="'mapbox://styles/mapbox/streets-v11'" [zoom]="[15]" [center]="[area.lng, area.lat]">
-        <mgl-marker #marker [lngLat]="[area.lng, area.lat]"></mgl-marker>
-        <mgl-control mglGeocoder (result)="changePosition($event.result)">
-        </mgl-control>
+        <mgl-marker #marker [lngLat]="[area.lng, area.lat]" [draggable]="true"></mgl-marker>
+        <mgl-control mglGeocoder (result)="changePosition($event.result)" placeholder="Escribe una dirección..."></mgl-control>
       </mgl-map>
     </ion-list>
-    <ion-img [src]="area.image" *ngIf="area.image"></ion-img>
     <ion-grid>
       <ion-row>
         <ion-col>

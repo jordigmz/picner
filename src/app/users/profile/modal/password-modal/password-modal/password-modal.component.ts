@@ -8,7 +8,7 @@ import { UsersService } from 'src/app/users/services/users.service';
   templateUrl: './password-modal.component.html',
   styleUrls: ['./password-modal.component.scss'],
 })
-export class PasswordModalComponent implements OnInit {
+export class PasswordModalComponent implements OnInit{
   user: User;
   password = '';
   password2 = '';
@@ -26,7 +26,8 @@ export class PasswordModalComponent implements OnInit {
   }
 
   editPassword() {
-    this.usersService.editPassword(this.password).subscribe(async () => {
+    this.user.password = this.password;
+    this.usersService.editPassword(this.user).subscribe(async () => {
       (
         await this.toast.create({
           duration: 1200,

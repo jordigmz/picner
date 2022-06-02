@@ -25,8 +25,7 @@ export class ProfilePage implements OnInit, AfterViewInit {
     lat: 38.4039418,
     lng: -0.5288701,
   };
-  lat = 38.4039418;
-  lng = -0.5288701;
+
   newPassword1 = '';
   newPassword2 = '';
   errorMessage = '';
@@ -40,18 +39,14 @@ export class ProfilePage implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    if (this.router.url.includes('me')) {
+    if (this.router.url.includes('users/me')) {
       this.usersService.getUser().subscribe((user) => {
         this.user = user;
-        this.lng = user.lng as number;
-        this.lat = user.lat as number;
       });
     } else {
       this.route.params.subscribe((param) => (this.idUser = param.id));
       this.usersService.getUser(this.idUser).subscribe((user) => {
         this.user = user;
-        this.lng = user.lng as number;
-        this.lat = user.lat as number;
       });
     }
   }
@@ -63,79 +58,90 @@ export class ProfilePage implements OnInit, AfterViewInit {
   }
 
   async editProfile() {
-    const modal = await this.modalCtrl.create({
-      component: NameModalComponent,
-      componentProps: { user: this.user.name, email: this.user.email },
-    });
-    await modal.present();
-    const result = await modal.onDidDismiss();
-    if (result.data && result.data.user.name && result.data.user.email) {
-      this.user.name = result.data.user.name;
-      this.user.email = result.data.user.email;
+    if (this.router.url.includes('users/me')) {
+      const modal = await this.modalCtrl.create({
+        component: NameModalComponent,
+        componentProps: { user: this.user.name, email: this.user.email },
+      });
+      await modal.present();
+      const result = await modal.onDidDismiss();
+      if (result.data && result.data.user.name && result.data.user.email) {
+        this.user.name = result.data.user.name;
+        this.user.email = result.data.user.email;
+      }
     }
   }
 
   async editPassword(): Promise<void> {
-    const modal = await this.modalCtrl.create({
-      component: PasswordModalComponent,
-      componentProps: { password: this.user.password },
-    });
-    await modal.present();
-    const password: string = this.newPassword1;
-    const password2: string = this.newPassword2;
-    const passwordEquals: boolean = password === password2;
+    if (this.router.url.includes('users/me')) {
+      const modal = await this.modalCtrl.create({
+        component: PasswordModalComponent
+      });
+      await modal.present();
+      const password: string = this.newPassword1;
+      const password2: string = this.newPassword2;
+      const passwordEquals: boolean = password === password2;
 
-    if (passwordEquals) {
-      this.user.password = password;
+      if (passwordEquals) {
+        this.user.password = password;
+      }
     }
   }
 
   async takePhoto() {
-    const photo = await Camera.getPhoto({
-      source: CameraSource.Camera,
-      quality: 90,
-      height: 400,
-      width: 400,
-      allowEditing: true,
-      resultType: CameraResultType.DataUrl,
-    });
+    if (this.router.url.includes('users/me')) {
+      const photo = await Camera.getPhoto({
+        source: CameraSource.Camera,
+        quality: 90,
+        height: 400,
+        width: 400,
+        allowEditing: true,
+        resultType: CameraResultType.DataUrl,
+      });
 
-    this.user.avatar = photo.dataUrl;
+      this.user.avatar = photo.dataUrl;
 
-    this.usersService.editAvatar(this.user.avatar).subscribe(async () => {
-      (
-        await this.toast.create({
-          duration: 1200,
-          position: 'bottom',
-          color: 'success',
-          icon: 'information-circle',
-          message: 'Foto del perfil actualizada.',
-        })
-      ).present();
-    });
+      this.usersService.editAvatar(this.user).subscribe(async () => {
+        (
+          await this.toast.create({
+            duration: 1200,
+            position: 'bottom',
+            color: 'success',
+            icon: 'information-circle',
+            message: 'Foto del perfil actualizada.',
+          })
+        ).present();
+      });
+
+      this.usersService.getUser().subscribe((user) => {
+        this.user = user;
+      });
+    }
   }
 
   async pickFromGallery() {
-    const photo = await Camera.getPhoto({
-      source: CameraSource.Photos,
-      height: 400,
-      width: 400,
-      allowEditing: true,
-      resultType: CameraResultType.DataUrl,
-    });
+    if (this.router.url.includes('users/me')) {
+      const photo = await Camera.getPhoto({
+        source: CameraSource.Photos,
+        height: 400,
+        width: 400,
+        allowEditing: true,
+        resultType: CameraResultType.DataUrl,
+      });
 
-    this.user.avatar = photo.dataUrl;
+      this.user.avatar = photo.dataUrl;
 
-    this.usersService.editAvatar(this.user.avatar).subscribe(async () => {
-      (
-        await this.toast.create({
-          duration: 1200,
-          position: 'bottom',
-          color: 'success',
-          icon: 'information-circle',
-          message: 'Foto del perfil actualizada.',
-        })
-      ).present();
-    });
+      this.usersService.editAvatar(this.user).subscribe(async () => {
+        (
+          await this.toast.create({
+            duration: 1200,
+            position: 'bottom',
+            color: 'success',
+            icon: 'information-circle',
+            message: 'Foto del perfil actualizada.',
+          })
+        ).present();
+      });
+    }
   }
 }
