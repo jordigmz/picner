@@ -52,7 +52,7 @@
       </div>
       <ion-item>
         <ion-label position="floating">Dirección</ion-label>
-        <ion-input name="address" [(ngModel)]="area.address" #addModel="ngModel" placeholder="Selecciona una ubicación en el mapa" readonly></ion-input>
+        <ion-input name="address" [(ngModel)]="area.address" #addModel="ngModel" readonly></ion-input>
         <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="addModel.dirty && addModel.valid">
         </ion-icon>
       </ion-item>

@@ -29,7 +29,7 @@ export class AreasFormPage implements OnInit, AfterViewInit {
     lat: 38.408131,
     lng: -0.792284,
     creator: '',
-    address: ''
+    address: 'Selecciona una ubicación en el mapa'
   };
 
   user: User;
@@ -115,7 +115,7 @@ export class AreasFormPage implements OnInit, AfterViewInit {
       lat: 0,
       lng: 0,
       creator: '',
-      address: ''
+      address: 'Selecciona una ubicación en el mapa'
     };
     this.imageName = '';
   }
