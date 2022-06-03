@@ -32,7 +32,7 @@ export class NameModalComponent implements OnInit {
           position: 'bottom',
           color: 'success',
           icon: 'information-circle',
-          message: 'Name and/or email changed!'
+          message: 'Información de la cuenta actualizada.'
         })).present();
         this.close();
       }

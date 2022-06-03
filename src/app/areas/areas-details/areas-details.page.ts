@@ -1,8 +1,9 @@
 /* eslint-disable no-underscore-dangle */
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController, NavController } from '@ionic/angular';
-import { shareReplay } from 'rxjs/operators';
+import { User } from 'src/app/users/interfaces/user';
+import { UsersService } from 'src/app/users/services/users.service';
 import { Area } from '../interfaces/areas';
 import { AreasService } from '../services/areas.service';
 
@@ -14,10 +15,12 @@ import { AreasService } from '../services/areas.service';
 })
 export class AreasDetailsPage implements OnInit {
   area: Area;
+  user: User;
 
   constructor(
     private alertCrl: AlertController,
     private areasService: AreasService,
+    private usersService: UsersService,
     private nav: NavController,
     private route: ActivatedRoute
   ) { }
@@ -25,6 +28,9 @@ export class AreasDetailsPage implements OnInit {
   async ngOnInit() {
     this.areasService.getArea(this.route.snapshot.params.id).subscribe((area) => {
       this.area = area;
+      this.usersService.getUser(this.area.creator).subscribe((user) => {
+        this.user = user;
+      });
     });
   }
 

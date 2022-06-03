@@ -62,8 +62,8 @@ export class RegisterPage implements OnInit {
           duration: 3000,
           position: 'bottom',
           color: 'success',
-          message: `Bienvenid@ ${this.user.name}!`,
           icon: 'information-circle',
+          message: `Bienvenid@ ${this.user.name}!`
         })
       ).present();
       this.authService.login(this.user.username, this.user.password).subscribe(

@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Area } from '../interfaces/areas';
+import { Area, AreaResponse } from '../interfaces/areas';
 import { Comments } from '../interfaces/comments';
 
 @Injectable({

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable @typescript-eslint/member-ordering */
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
@@ -8,6 +9,8 @@ import { Geolocation } from '@capacitor/geolocation';
 import { NavController, ToastController } from '@ionic/angular';
 import { MapComponent } from 'ngx-mapbox-gl';
 import { Result } from 'ngx-mapbox-gl-geocoder-control';
+import { User } from 'src/app/users/interfaces/user';
+import { UsersService } from 'src/app/users/services/users.service';
 import { Area } from '../interfaces/areas';
 import { AreasService } from '../services/areas.service';
 
@@ -25,8 +28,11 @@ export class AreasFormPage implements OnInit, AfterViewInit {
     image: '',
     lat: 38.408131,
     lng: -0.792284,
+    creator: '',
     address: ''
   };
+
+  user: User;
 
   imageName = '';
   posted = false;
@@ -36,6 +42,7 @@ export class AreasFormPage implements OnInit, AfterViewInit {
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private areasService: AreasService,
+    private usersService: UsersService,
     private toastCtrl: ToastController,
     private nav: NavController
   ) { }
@@ -49,6 +56,10 @@ export class AreasFormPage implements OnInit, AfterViewInit {
         this.area.lat = area.lat as number;
       });
     } else {
+      this.usersService.getUser().subscribe((user) => {
+        this.user = user;
+      });
+
       this.resetForm();
 
       const coordinates = await Geolocation.getCurrentPosition();
@@ -103,7 +114,8 @@ export class AreasFormPage implements OnInit, AfterViewInit {
       image: '',
       lat: 0,
       lng: 0,
-      address: 'Selecciona una ubicación en el mapa'
+      creator: '',
+      address: ''
     };
     this.imageName = '';
   }
@@ -114,10 +126,11 @@ export class AreasFormPage implements OnInit, AfterViewInit {
         async (ev) => {
           (
             await this.toastCtrl.create({
-              position: 'bottom',
               duration: 1200,
-              message: 'Se ha actualizado el área.',
+              position: 'bottom',
               color: 'success',
+              icon: 'information-circle',
+              message: 'Se ha actualizado el área.',
             })
           ).present();
           this.nav.navigateRoot(['/areas']);
@@ -125,21 +138,27 @@ export class AreasFormPage implements OnInit, AfterViewInit {
         async (error) =>
           (
             await this.toastCtrl.create({
-              position: 'bottom',
               duration: 1200,
+              position: 'bottom',
+              color: 'danger',
+              icon: 'alert-circle-sharp',
               message: 'Error editando el área.',
             })
           ).present()
       );
     } else {
+      this.area.creator = this.user._id;
+
+      console.log(this.area);
       this.areasService.addArea(this.area).subscribe(
         async (ev) => {
           (
             await this.toastCtrl.create({
-              position: 'bottom',
               duration: 1200,
-              message: '¡Nueva área publicada!',
+              position: 'bottom',
               color: 'success',
+              icon: 'information-circle',
+              message: '¡Nueva área publicada!',
             })
           ).present();
           this.nav.navigateRoot(['/areas']);
@@ -147,8 +166,10 @@ export class AreasFormPage implements OnInit, AfterViewInit {
         async (error) =>
           (
             await this.toastCtrl.create({
-              position: 'bottom',
               duration: 1200,
+              position: 'bottom',
+              color: 'danger',
+              icon: 'alert-circle-sharp',
               message: 'Error publicando el área.',
             })
           ).present()

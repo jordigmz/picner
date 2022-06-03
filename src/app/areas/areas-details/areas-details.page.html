@@ -12,20 +12,21 @@
 <ion-content>
   <ion-card *ngIf="area">
     <img [src]="area.image">
-    <ion-card-content>
-      <ion-card-title class="ion-padding-bottom">{{area.name}}</ion-card-title>
-      <ion-card-subtitle>{{area.description}}</ion-card-subtitle>
-      <ion-button *ngIf="true" expand="block" color="danger" class="ion-margin-top" (click)="delete()">
+    <ion-card-content class="ion-padding-bottom">
+      <ion-card-title style="padding-bottom: 5px;">{{area.name}}</ion-card-title>
+      <ion-card-subtitle *ngIf="area.address"><b>Dirección:</b> {{area.address}}</ion-card-subtitle>
+      <ion-button *ngIf="area.mine" expand="block" color="danger" class="ion-margin-top" (click)="delete()">
         <ion-icon name="trash-outline" slot="start"></ion-icon>
         <ion-label>Eliminar área</ion-label>
       </ion-button>
+      <p class="descArea">{{area.description}}</p>
     </ion-card-content>
     <ion-item lines="none">
-      <ion-avatar slot="start">
-        <img [src]="">
+      <ion-avatar slot="start" [routerLink]="['/users', area.creator]">
+        <img *ngIf="user" [src]="user.avatar">
       </ion-avatar>
-      <ion-label><a [routerLink]="['/users', area._id]">Creator</a></ion-label>
-      <ion-button *ngIf="true" color="primary" [routerLink]="['/events', area._id, 'edit']">
+      <ion-label><a *ngIf="user" [routerLink]="['/users', area.creator]">{{user.username}}</a></ion-label>
+      <ion-button *ngIf="area.mine" color="primary" [routerLink]="['/events', area._id, 'edit']">
         <ion-icon style="font-size: 14px; padding-left: 5px;" name="create-outline" slot="start"></ion-icon>
         Editar área
       </ion-button>

@@ -1,5 +1,3 @@
-import { User } from '../../users/interfaces/user';
-
 export interface Area {
   _id?: string;
   name: string;
@@ -7,11 +5,11 @@ export interface Area {
   image: string;
   lat: number;
   lng: number;
+  creator: string;
   address?: string;
-  visibility?: number;
-  creator?: string;
-  distance?: number;
   mine?: boolean;
+  visibility?: number;
+  distance?: number;
 }
 
 export interface AreasResponse {
