@@ -31,10 +31,10 @@
       </ion-refresher>
       <ion-list>
         <ion-item *ngFor="let area of areas">
-          <ion-thumbnail slot="start">
+          <ion-thumbnail slot="start" [routerLink]="['/areas/details/', area._id]" [routerDirection]="'forward'">
             <img [src]="area.image" style="border-radius: 50%;">
           </ion-thumbnail>
-          <ion-label text-wrap>
+          <ion-label text-wrap [routerLink]="['/areas/details/', area._id]" [routerDirection]="'forward'">
             <h2>{{area.name}}</h2>
           </ion-label>
           <ion-button slot="end" fill="clear" color="danger" (click)="delete(area._id)">

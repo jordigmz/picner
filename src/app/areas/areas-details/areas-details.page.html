@@ -12,7 +12,8 @@
 <ion-content>
   <ion-fab vertical="top" horizontal="end" slot="fixed" class="ion-padding">
     <ion-fab-button color="light" (click)="guardarArea()">
-      <ion-icon name="bookmark-outline"></ion-icon>
+      <ion-icon *ngIf="!saved" name="bookmark-outline"></ion-icon>
+      <ion-icon *ngIf="saved" name="bookmark-sharp"></ion-icon>
     </ion-fab-button>
   </ion-fab>
   <ion-card *ngIf="area">

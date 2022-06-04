@@ -17,6 +17,7 @@ export class AreasDetailsPage implements OnInit {
   area: Area = {} as Area;
   user: User = {} as User;
   me: User = {} as User;
+  saved = false;
 
   constructor(
     private alertCrl: AlertController,
@@ -38,25 +39,62 @@ export class AreasDetailsPage implements OnInit {
 
     this.usersService.getUser().subscribe((user) => {
       this.me = user;
+
+      if(this.me.guardados !== [] && this.me.guardados.filter(saved => saved === this.area._id).length === 1) {
+        this.saved = true;
+        console.log('guardado');
+      } else {
+        this.saved = false;
+        console.log('desguardado');
+      }
     });
   }
 
   async guardarArea() {
-    if(!this.me.guardados.includes(this.area._id)) {
-      this.me.guardados.push(this.area._id);
+    if (this.saved) {
+      this.saved = false;
+      this.deleteGuardados(this.area._id);
+      console.log('desguardado 2');
+    } else {
+      this.saved = true;
+      console.log('guardado 2');
 
-      this.usersService.editUser(this.me).subscribe(
-        async () => {
-          (await this.toast.create({
-            duration: 1200,
-            position: 'bottom',
-            color: 'primary',
-            icon: 'information-circle',
-            message: 'Se ha guardado el área correctamente.'
-          })).present();
-        }
-      );
+      this.usersService.getUser().subscribe((user) => {
+        this.me = user;
+      });
+
+      if(!this.me.guardados.includes(this.area._id)) {
+        this.me.guardados.push(this.area._id);
+
+        this.usersService.editUser(this.me).subscribe(
+          async () => {
+            (await this.toast.create({
+              duration: 1200,
+              position: 'bottom',
+              color: 'primary',
+              icon: 'bookmark-sharp',
+              message: 'Área guardada.'
+            })).present();
+          }
+        );
+      }
     }
+  }
+
+  async deleteGuardados(id: string) {
+    this.user.guardados = this.user.guardados.filter(saved => saved !== id);
+
+    this.usersService.editUser(this.user).subscribe(
+      async () => {
+        (await this.toast.create({
+          duration: 1200,
+          position: 'bottom',
+          color: 'danger',
+          icon: 'information-circle',
+          message: 'Se eliminó de guardados.'
+        })).present();
+      }
+    );
   }
 
   async delete() {
