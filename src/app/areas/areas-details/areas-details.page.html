@@ -10,6 +10,11 @@
 </ion-header>
 
 <ion-content>
+  <ion-fab vertical="top" horizontal="end" slot="fixed" class="ion-padding">
+    <ion-fab-button color="light" (click)="guardarArea()">
+      <ion-icon name="bookmark-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <ion-card *ngIf="area">
     <img [src]="area.image">
     <ion-card-content class="ion-padding-bottom">
@@ -32,4 +37,9 @@
       </ion-button>
     </ion-item>
   </ion-card>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="ion-padding">
+    <ion-fab-button (click)="startNavigation()">
+      <ion-icon name="navigate"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

@@ -149,7 +149,6 @@ export class AreasFormPage implements OnInit, AfterViewInit {
     } else {
       this.area.creator = this.user._id;
 
-      console.log(this.area);
       this.areasService.addArea(this.area).subscribe(
         async (ev) => {
           (

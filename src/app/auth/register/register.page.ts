@@ -23,6 +23,7 @@ export class RegisterPage implements OnInit {
     avatar: '',
     lat: 0,
     lng: 0,
+    guardados: []
   };
   email2 = '';
 
@@ -51,6 +52,7 @@ export class RegisterPage implements OnInit {
       avatar: '',
       lat: 0,
       lng: 0,
+      guardados: []
     };
     this.email2 = '';
   }

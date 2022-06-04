@@ -23,6 +23,7 @@ export class AreasMapPage implements OnInit, AfterViewInit {
     avatar: '',
     lat: 38.381783,
     lng: -0.778259,
+    guardados: []
   };
 
   areas: Area[] = [];

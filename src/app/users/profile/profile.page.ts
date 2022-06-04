@@ -24,6 +24,7 @@ export class ProfilePage implements OnInit, AfterViewInit {
     avatar: '',
     lat: 38.4039418,
     lng: -0.5288701,
+    guardados: []
   };
 
   newPassword1 = '';
