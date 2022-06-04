@@ -41,6 +41,10 @@ export class AreasSavedPage implements OnInit {
       message: '¿Deseas eliminar esta área de guardados?',
       buttons: [
         {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
           text: 'Aceptar',
           handler: () => {
             this.user.guardados = this.user.guardados.filter(saved => saved !== id);
@@ -57,10 +61,6 @@ export class AreasSavedPage implements OnInit {
               }
             );
           }
-        },
-        {
-          text: 'Cancelar',
-          role: 'cancel'
         }
       ]
     });

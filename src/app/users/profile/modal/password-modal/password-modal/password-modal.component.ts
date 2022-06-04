@@ -9,7 +9,7 @@ import { UsersService } from 'src/app/users/services/users.service';
   styleUrls: ['./password-modal.component.scss'],
 })
 export class PasswordModalComponent implements OnInit{
-  user: User;
+  user: User = {} as User;
   password = '';
   password2 = '';
 

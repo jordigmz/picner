@@ -29,9 +29,9 @@
     </ion-card-content>
     <ion-item lines="none">
       <ion-avatar slot="start" [routerLink]="['/users', area.creator]">
-        <img *ngIf="user" [src]="user.avatar">
+        <img *ngIf="creator" [src]="creator.avatar">
       </ion-avatar>
-      <ion-label><a *ngIf="user" [routerLink]="['/users', area.creator]">{{user.username}}</a></ion-label>
+      <ion-label><a *ngIf="creator" [routerLink]="['/users', area.creator]">{{creator.username}}</a></ion-label>
       <ion-button *ngIf="area.mine" color="primary" [routerLink]="['/events', area._id, 'edit']">
         <ion-icon style="font-size: 14px; padding-left: 5px;" name="create-outline" slot="start"></ion-icon>
         Editar área

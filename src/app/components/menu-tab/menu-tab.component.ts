@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { User } from 'src/app/users/interfaces/user';
+import { UsersService } from 'src/app/users/services/users.service';
 
 @Component({
   selector: 'app-menu-tab',
@@ -7,31 +9,35 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./menu-tab.component.scss'],
 })
 export class MenuTabComponent implements OnInit {
-  contactSOS = 112;
-  constructor(private alertController: AlertController) { }
+  user: User;
+  constructor(private alertController: AlertController, private usersService: UsersService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.usersService.getUser().subscribe((user) => {
+      this.user = user;
+    });
+  }
 
   async emergencyCall() {
     const alert = await this.alertController.create({
       cssClass: 'emergencyAlert',
       header: '¿Necesitas ayuda?',
-      message: 'Solicita SOS por defecto al número <strong>112</strong> o al contacto de emergencia establecido.',
+      message: `Solicita SOS al contacto de emergencia <b>${this.user.sos}</b>.`,
       buttons: [
         {
           text: 'No',
           role: 'cancel',
           id: 'cancel-button',
           handler: () => {
-            console.log('Cancela llamar a emergencias');
+            console.log('Cancela llamar al contacto de emergencia');
           }
         }, {
           text: 'Sí',
           cssClass: 'confirmSOS',
           id: 'confirm-button',
           handler: () => {
-            console.log('Confirma llamar a emergencias');
-            window.open('tel:'+this.contactSOS);
+            console.log('Confirma llamar al contacto de emergencia');
+            window.open('tel:'+this.user.sos);
           }
         }
       ]

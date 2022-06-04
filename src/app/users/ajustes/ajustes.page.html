@@ -10,5 +10,17 @@
 </ion-header>
 
 <ion-content>
-
+  <form #sosForm="ngForm" (ngSubmit)="changeSOS()" *ngIf="me">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Contacto de emergencia (SOS)</ion-label>
+        <ion-input name="sos" required [(ngModel)]="me.sos" #sosModel="ngModel"></ion-input>
+        <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="sosModel.dirty && sosModel.valid"></ion-icon>
+      </ion-item>
+    </ion-list>
+    <ion-button type="submit" color="success" expand="block">
+      <ion-icon name="paper" slot="add-circle"></ion-icon>
+      Guardar
+    </ion-button>
+  </form>
 </ion-content>

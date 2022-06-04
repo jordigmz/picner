@@ -8,6 +8,7 @@ export interface User {
   lat: number;
   lng: number;
   guardados: string[];
+  sos: number;
   me?: boolean;
 }
 

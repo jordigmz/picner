@@ -15,7 +15,7 @@ import { AreasService } from '../services/areas.service';
 })
 export class AreasDetailsPage implements OnInit {
   area: Area = {} as Area;
-  user: User = {} as User;
+  creator: User = {} as User;
   me: User = {} as User;
   saved = false;
 
@@ -31,22 +31,24 @@ export class AreasDetailsPage implements OnInit {
   async ngOnInit() {
     this.areasService.getArea(this.route.snapshot.params.id).subscribe((area) => {
       this.area = area;
-    });
 
-    this.usersService.getUser(this.area.creator).subscribe((user) => {
-      this.user = user;
-    });
+      this.usersService.getUser(this.area.creator).subscribe((user) => {
+        this.creator = user;
+      });
 
-    this.usersService.getUser().subscribe((user) => {
-      this.me = user;
+      this.usersService.getUser().subscribe((user) => {
+        this.me = user;
 
-      if(this.me.guardados !== [] && this.me.guardados.filter(saved => saved === this.area._id).length === 1) {
-        this.saved = true;
-        console.log('guardado');
-      } else {
-        this.saved = false;
-        console.log('desguardado');
-      }
+        if(this.me.guardados !== [] && this.me.guardados.filter(saved => saved === this.area._id).length === 1) {
+          this.saved = true;
+        } else {
+          this.saved = false;
+        }
+
+        if (this.me._id === this.area.creator) {
+          this.area.mine = true;
+        }
+      });
     });
   }
 
@@ -54,10 +56,8 @@ export class AreasDetailsPage implements OnInit {
     if (this.saved) {
       this.saved = false;
       this.deleteGuardados(this.area._id);
-      console.log('desguardado 2');
     } else {
       this.saved = true;
-      console.log('guardado 2');
 
       this.usersService.getUser().subscribe((user) => {
         this.me = user;
@@ -82,9 +82,9 @@ export class AreasDetailsPage implements OnInit {
   }
 
   async deleteGuardados(id: string) {
-    this.user.guardados = this.user.guardados.filter(saved => saved !== id);
+    this.me.guardados = this.me.guardados.filter(saved => saved !== id);
 
-    this.usersService.editUser(this.user).subscribe(
+    this.usersService.editUser(this.me).subscribe(
       async () => {
         (await this.toast.create({
           duration: 1200,
@@ -103,16 +103,16 @@ export class AreasDetailsPage implements OnInit {
       message: '¿Seguro que quieres borrar esta área?',
       buttons: [
         {
-          text: 'Ok',
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Aceptar',
           handler: () => {
             this.areasService
               .deleteArea(this.area._id)
               .subscribe(() => this.nav.navigateBack(['/areas']));
           }
-        },
-        {
-          text: 'Cancelar',
-          role: 'cancel'
         }
       ]
     });

@@ -23,7 +23,8 @@ export class RegisterPage implements OnInit {
     avatar: '',
     lat: 0,
     lng: 0,
-    guardados: []
+    guardados: [],
+    sos: 112
   };
   email2 = '';
 
@@ -49,10 +50,11 @@ export class RegisterPage implements OnInit {
       name: '',
       password: '',
       email: '',
-      avatar: '',
+      avatar: '/assets/img/user.png',
       lat: 0,
       lng: 0,
-      guardados: []
+      guardados: [],
+      sos: 112
     };
     this.email2 = '';
   }
@@ -68,6 +70,7 @@ export class RegisterPage implements OnInit {
           message: `Bienvenid@ ${this.user.name}!`
         })
       ).present();
+      this.resetForm();
       this.authService.login(this.user.username, this.user.password).subscribe(
         () => this.router.navigate(['/areas']),
         async (error) => {

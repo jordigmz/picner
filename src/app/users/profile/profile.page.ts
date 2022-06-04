@@ -24,7 +24,8 @@ export class ProfilePage implements OnInit, AfterViewInit {
     avatar: '',
     lat: 38.4039418,
     lng: -0.5288701,
-    guardados: []
+    guardados: [],
+    sos: 112
   };
 
   newPassword1 = '';
@@ -41,15 +42,19 @@ export class ProfilePage implements OnInit, AfterViewInit {
 
   ngOnInit() {
     if (this.router.url.includes('users/me')) {
-      this.usersService.getUser().subscribe((user) => {
-        this.user = user;
-      });
+      this.getMe();
     } else {
       this.route.params.subscribe((param) => (this.idUser = param.id));
       this.usersService.getUser(this.idUser).subscribe((user) => {
         this.user = user;
       });
     }
+  }
+
+  getMe() {
+    this.usersService.getUser().subscribe((user) => {
+      this.user = user;
+    });
   }
 
   ngAfterViewInit() {
@@ -70,6 +75,7 @@ export class ProfilePage implements OnInit, AfterViewInit {
         this.user.name = result.data.user.name;
         this.user.email = result.data.user.email;
       }
+      this.getMe();
     }
   }
 
@@ -114,9 +120,7 @@ export class ProfilePage implements OnInit, AfterViewInit {
         ).present();
       });
 
-      this.usersService.getUser().subscribe((user) => {
-        this.user = user;
-      });
+      this.getMe();
     }
   }
 
@@ -144,5 +148,7 @@ export class ProfilePage implements OnInit, AfterViewInit {
         ).present();
       });
     }
+
+    this.getMe();
   }
 }

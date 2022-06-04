@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-shadow */
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { NavController, PopoverController } from '@ionic/angular';
 import { MapComponent } from 'ngx-mapbox-gl';
 import { HeaderPopoverComponent } from 'src/app/components/header-popover/header-popover.component';
@@ -23,7 +23,8 @@ export class AreasMapPage implements OnInit, AfterViewInit {
     avatar: '',
     lat: 38.381783,
     lng: -0.778259,
-    guardados: []
+    guardados: [],
+    sos: 112
   };
 
   areas: Area[] = [];
@@ -42,10 +43,6 @@ export class AreasMapPage implements OnInit, AfterViewInit {
     this.areasService.getAreas().subscribe((ars) => {
       this.areas = this.areas.concat(ars);
     });
-  }
-
-  ionViewWillEnter() {
-
   }
 
   ngAfterViewInit() {
