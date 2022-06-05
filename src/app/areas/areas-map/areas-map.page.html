@@ -13,7 +13,12 @@
 
 <ion-content>
   <mgl-map [style]="'mapbox://styles/mapbox/streets-v11'" [zoom]="[14]" [center]="[user.lng, user.lat]">
-    <mgl-marker #marker [lngLat]="[user.lng, user.lat]"></mgl-marker>
+    <mgl-marker #marker [lngLat]="[user.lng, user.lat]">
+      <div class="marker"><ion-icon name="man" class="youHere"></ion-icon></div>
+    </mgl-marker>
+    <mgl-popup [marker]="marker">
+      Estás aquí
+    </mgl-popup>
     <mgl-marker *ngFor="let area of areas" [lngLat]="[area.lng, area.lat]">
       <div [routerLink]="['/areas/details/', area._id]" [routerDirection]="'forward'" class="marker"><ion-icon name="location-sharp" class="areaMarker"></ion-icon></div>
     </mgl-marker>

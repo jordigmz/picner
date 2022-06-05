@@ -42,19 +42,15 @@ export class ProfilePage implements OnInit, AfterViewInit {
 
   ngOnInit() {
     if (this.router.url.includes('users/me')) {
-      this.getMe();
+      this.usersService.getUser().subscribe((user) => {
+        this.user = user;
+      });
     } else {
       this.route.params.subscribe((param) => (this.idUser = param.id));
       this.usersService.getUser(this.idUser).subscribe((user) => {
         this.user = user;
       });
     }
-  }
-
-  getMe() {
-    this.usersService.getUser().subscribe((user) => {
-      this.user = user;
-    });
   }
 
   ngAfterViewInit() {
@@ -75,7 +71,10 @@ export class ProfilePage implements OnInit, AfterViewInit {
         this.user.name = result.data.user.name;
         this.user.email = result.data.user.email;
       }
-      this.getMe();
+
+      this.usersService.getUser().subscribe((user) => {
+        this.user = user;
+      });
     }
   }
 
@@ -119,8 +118,6 @@ export class ProfilePage implements OnInit, AfterViewInit {
           })
         ).present();
       });
-
-      this.getMe();
     }
   }
 
@@ -148,7 +145,5 @@ export class ProfilePage implements OnInit, AfterViewInit {
         ).present();
       });
     }
-
-    this.getMe();
   }
 }

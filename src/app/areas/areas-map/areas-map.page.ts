@@ -40,8 +40,8 @@ export class AreasMapPage implements OnInit, AfterViewInit {
       this.user = user;
     });
 
-    this.areasService.getAreas().subscribe((ars) => {
-      this.areas = this.areas.concat(ars);
+    this.areasService.getAreas().subscribe((areas) => {
+      this.areas = this.areas.concat(areas);
     });
   }
 

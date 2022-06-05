@@ -27,11 +27,13 @@
       </ion-button>
       <p class="descArea">{{area.description}}</p>
     </ion-card-content>
-    <ion-item lines="none">
-      <ion-avatar slot="start" [routerLink]="['/users', area.creator]">
-        <img *ngIf="creator" [src]="creator.avatar">
-      </ion-avatar>
-      <ion-label><a *ngIf="creator" [routerLink]="['/users', area.creator]">{{creator.username}}</a></ion-label>
+    <ion-item lines="none" *ngIf="creator">
+      <ion-avatar slot="start" *ngIf="area.creator === me._id" [routerLink]="['/users/me']"><img [src]="creator.avatar"></ion-avatar>
+      <ion-avatar slot="start" *ngIf="area.creator !== me._id" [routerLink]="['/users', area.creator]"><img [src]="creator.avatar"></ion-avatar>
+      <ion-label>
+        <a *ngIf="area.creator === me._id" [routerLink]="['/users/me']">{{creator.username}}</a>
+        <a *ngIf="area.creator !== me._id" [routerLink]="['/users', area.creator]">{{creator.username}}</a>
+      </ion-label>
       <ion-button *ngIf="area.mine" color="primary" [routerLink]="['/events', area._id, 'edit']">
         <ion-icon style="font-size: 14px; padding-left: 5px;" name="create-outline" slot="start"></ion-icon>
         Editar área

@@ -4,16 +4,22 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AreasSavedPageRoutingModule } from './areas-saved-routing.module';
-
 import { AreasSavedPage } from './areas-saved.page';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: AreasSavedPage
+  }
+];
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AreasSavedPageRoutingModule
+    RouterModule.forChild(routes)
   ],
   declarations: [AreasSavedPage]
 })

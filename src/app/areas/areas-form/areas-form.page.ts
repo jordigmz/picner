@@ -7,7 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Geolocation } from '@capacitor/geolocation';
 import { NavController, ToastController } from '@ionic/angular';
-import { MapComponent } from 'ngx-mapbox-gl';
+import { LngLat } from 'mapbox-gl';
+import { MapComponent, MarkerComponent } from 'ngx-mapbox-gl';
 import { Result } from 'ngx-mapbox-gl-geocoder-control';
 import { User } from 'src/app/users/interfaces/user';
 import { UsersService } from 'src/app/users/services/users.service';
@@ -82,6 +83,11 @@ export class AreasFormPage implements OnInit, AfterViewInit {
     this.mapComp.mapLoad.subscribe(() => {
       this.mapComp.mapInstance.resize();
     });
+  }
+
+  changeLngLat(lngLat: any) {
+    this.area.lng = +lngLat[0];
+    this.area.lat = +lngLat[1];
   }
 
   changePosition(result: Result) {
