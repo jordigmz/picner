@@ -32,7 +32,17 @@ export class AreasFormPage implements OnInit, AfterViewInit {
     address: 'Selecciona una ubicación en el mapa'
   };
 
-  user: User;
+  user: User = {
+    name: '',
+    username: '',
+    email: '',
+    password: '',
+    avatar: '',
+    lat: 38.381783,
+    lng: -0.778259,
+    guardados: [],
+    sos: 112
+  };
 
   imageName = '';
   posted = false;
