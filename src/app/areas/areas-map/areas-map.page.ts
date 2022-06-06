@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-shadow */
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { MapComponent } from 'ngx-mapbox-gl';
 import { HeaderPopoverComponent } from 'src/app/components/header-popover/header-popover.component';
@@ -13,7 +13,7 @@ import { AreasService } from '../services/areas.service';
   templateUrl: './areas-map.page.html',
   styleUrls: ['./areas-map.page.scss'],
 })
-export class AreasMapPage implements AfterViewInit {
+export class AreasMapPage {
   @ViewChild(MapComponent) mapComp: MapComponent;
   user: User = {
     name: '',
@@ -42,12 +42,6 @@ export class AreasMapPage implements AfterViewInit {
 
     this.areasService.getAreas().subscribe((areas) => {
       this.areas = areas;
-    });
-  }
-
-  ngAfterViewInit() {
-    this.mapComp.mapLoad.subscribe(() => {
-      this.mapComp.mapInstance.resize(); // Necessary for full height map
     });
   }
 

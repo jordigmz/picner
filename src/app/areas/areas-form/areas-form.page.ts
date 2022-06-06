@@ -1,13 +1,12 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable @typescript-eslint/member-ordering */
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Geolocation } from '@capacitor/geolocation';
 import { NavController, ToastController } from '@ionic/angular';
-import { LngLat } from 'mapbox-gl';
 import { MapComponent, MarkerComponent } from 'ngx-mapbox-gl';
 import { Result } from 'ngx-mapbox-gl-geocoder-control';
 import { User } from 'src/app/users/interfaces/user';
@@ -20,7 +19,7 @@ import { AreasService } from '../services/areas.service';
   templateUrl: './areas-form.page.html',
   styleUrls: ['./areas-form.page.scss'],
 })
-export class AreasFormPage implements OnInit, AfterViewInit {
+export class AreasFormPage implements OnInit {
   idArea = '';
   @ViewChild(MapComponent) mapComp: MapComponent;
   area: Area = {
@@ -77,12 +76,6 @@ export class AreasFormPage implements OnInit, AfterViewInit {
       this.area.lat = coordinates.coords.latitude;
       this.area.lng = coordinates.coords.longitude;
     }
-  }
-
-  ngAfterViewInit() {
-    this.mapComp.mapLoad.subscribe(() => {
-      this.mapComp.mapInstance.resize();
-    });
   }
 
   changeLngLat(marker: MarkerComponent) {

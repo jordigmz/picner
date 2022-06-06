@@ -13,7 +13,7 @@ import { PasswordModalComponent } from './modal/password-modal/password-modal/pa
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
-export class ProfilePage implements OnInit, AfterViewInit {
+export class ProfilePage implements OnInit {
   @ViewChild(MapComponent) mapComp: MapComponent;
   idUser = '';
   user: User = {
@@ -51,12 +51,6 @@ export class ProfilePage implements OnInit, AfterViewInit {
         this.user = user;
       });
     }
-  }
-
-  ngAfterViewInit() {
-    this.mapComp.mapLoad.subscribe(() => {
-      this.mapComp.mapInstance.resize();
-    });
   }
 
   async editProfile() {

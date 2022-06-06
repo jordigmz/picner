@@ -41,7 +41,7 @@
         <ion-label>Cambiar contraseña</ion-label>
       </ion-button>
     </ion-card-content>
-    <mgl-map class="ion-margin-top" #mapComponent [style]="'mapbox://styles/mapbox/streets-v11'" [zoom]="[10]" [center]="[user.lng, user.lat]">
+    <mgl-map #map class="ion-margin-top" #mapComponent [style]="'mapbox://styles/mapbox/streets-v11'" [zoom]="[10]" [center]="[user.lng, user.lat]" (load)="map.mapInstance.resize()">
       <mgl-marker #marker [lngLat]="[user.lng, user.lat]"></mgl-marker>
       <mgl-popup [marker]="marker">
         Última conexión
