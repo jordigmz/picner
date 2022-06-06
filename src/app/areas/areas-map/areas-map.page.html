@@ -12,7 +12,7 @@
 <app-header-popover></app-header-popover>
 
 <ion-content>
-  <mgl-map #map [style]="'mapbox://styles/mapbox/streets-v11'" [zoom]="[14]" [center]="[user.lng, user.lat]" (load)="map.mapInstance.resize()">
+  <mgl-map #map [style]="'mapbox://styles/mapbox/streets-v11'" [zoom]="[14]" [center]="[user.lng, user.lat]" (mapLoad)="map.mapInstance.resize()">
     <mgl-marker #marker [lngLat]="[user.lng, user.lat]">
       <div class="marker"><ion-icon name="man" class="youHere"></ion-icon></div>
     </mgl-marker>

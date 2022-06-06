@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Geolocation } from '@capacitor/geolocation';
 import { NavController, ToastController } from '@ionic/angular';
-import { MapComponent, MarkerComponent } from 'ngx-mapbox-gl';
+import { MarkerComponent } from 'ngx-mapbox-gl';
 import { Result } from 'ngx-mapbox-gl-geocoder-control';
 import { User } from 'src/app/users/interfaces/user';
 import { UsersService } from 'src/app/users/services/users.service';
@@ -21,7 +21,6 @@ import { AreasService } from '../services/areas.service';
 })
 export class AreasFormPage implements OnInit {
   idArea = '';
-  @ViewChild(MapComponent) mapComp: MapComponent;
   area: Area = {
     name: '',
     description: '',

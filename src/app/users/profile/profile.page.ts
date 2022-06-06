@@ -2,7 +2,6 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { ModalController, ToastController } from '@ionic/angular';
-import { MapComponent } from 'ngx-mapbox-gl';
 import { User } from '../interfaces/user';
 import { UsersService } from '../services/users.service';
 import { NameModalComponent } from './modal/name-modal/name-modal/name-modal.component';
@@ -14,7 +13,6 @@ import { PasswordModalComponent } from './modal/password-modal/password-modal/pa
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  @ViewChild(MapComponent) mapComp: MapComponent;
   idUser = '';
   user: User = {
     name: '',

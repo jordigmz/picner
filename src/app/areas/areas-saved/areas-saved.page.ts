@@ -15,6 +15,8 @@ export class AreasSavedPage implements OnInit {
   user: User = {} as User;
   areas: Area[] = [];
 
+  areasSaved: Area[] = [];
+
   constructor(private usersService: UsersService,
     private areasService: AreasService,
     private alertCrl: AlertController,
@@ -25,10 +27,18 @@ export class AreasSavedPage implements OnInit {
     this.usersService.getUser().subscribe((user) => {
       this.user = user;
 
+      this.areasService.getAreas().subscribe((areas) => {
+        this.areas = areas;
+      });
+
       if(this.user.guardados !== []) {
         for(let idArea of this.user.guardados) {
           this.areasService.getArea(idArea).subscribe((area) => {
-            this.areas.push(area);
+            if(area) {
+              this.areasSaved.push(area);
+            } else {
+              this.user.guardados = this.user.guardados.filter(saved => saved !== idArea);
+            }
           });
         }
       }

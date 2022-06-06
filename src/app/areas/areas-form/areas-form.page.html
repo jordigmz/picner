@@ -56,7 +56,7 @@
         <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="addModel.dirty && addModel.valid">
         </ion-icon>
       </ion-item>
-      <mgl-map #map [style]="'mapbox://styles/mapbox/streets-v11'" [zoom]="[15]" [center]="[user.lng, user.lat]" (load)="map.mapInstance.resize()">
+      <mgl-map #map [style]="'mapbox://styles/mapbox/streets-v11'" [zoom]="[15]" [center]="[user.lng, user.lat]" (mapLoad)="map.mapInstance.resize()">
         <mgl-marker #marker [lngLat]="[area.lng, area.lat]" [draggable]="true" (dragEnd)="changeLngLat(marker)"></mgl-marker>
         <mgl-control mglGeocoder (result)="changePosition($event.result)" placeholder="Escribe una dirección..."></mgl-control>
       </mgl-map>

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import { Component, ViewChild } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
-import { MapComponent } from 'ngx-mapbox-gl';
+import { Geolocation, Position } from '@capacitor/geolocation';
 import { HeaderPopoverComponent } from 'src/app/components/header-popover/header-popover.component';
 import { User } from 'src/app/users/interfaces/user';
 import { UsersService } from 'src/app/users/services/users.service';
@@ -14,7 +14,6 @@ import { AreasService } from '../services/areas.service';
   styleUrls: ['./areas-map.page.scss'],
 })
 export class AreasMapPage {
-  @ViewChild(MapComponent) mapComp: MapComponent;
   user: User = {
     name: '',
     username: '',
@@ -29,15 +28,22 @@ export class AreasMapPage {
 
   areas: Area[] = [];
 
+  coordinates: Position;
+
   constructor(
     private popoverCtrl: PopoverController,
     private areasService: AreasService,
     private usersService: UsersService
   ) {}
 
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
+    this.coordinates = await Geolocation.getCurrentPosition();
+
     this.usersService.getUser().subscribe((user) => {
       this.user = user;
+
+      this.user.lat = this.coordinates.coords.latitude;
+      this.user.lng = this.coordinates.coords.longitude;
     });
 
     this.areasService.getAreas().subscribe((areas) => {

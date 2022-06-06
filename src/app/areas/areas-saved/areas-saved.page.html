@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-    <ion-grid class="ion-text-center" id="gridGuardados" *ngIf="areas.length === 0">
+    <ion-grid class="ion-text-center" id="gridGuardados" *ngIf="areasSaved.length === 0">
       <div id="gridContentGuardados">
         <ion-row>
           <ion-col>
@@ -24,13 +24,9 @@
         </ion-row>
       </div>
     </ion-grid>
-    <div *ngIf="areas.length > 0">
-      <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
-        <ion-refresher-content>
-        </ion-refresher-content>
-      </ion-refresher>
+    <div *ngIf="areasSaved.length > 0">
       <ion-list>
-        <ion-item *ngFor="let area of areas">
+        <ion-item *ngFor="let area of areasSaved">
           <ion-thumbnail slot="start" [routerLink]="['/areas/details/', area._id]" [routerDirection]="'forward'">
             <img [src]="area.image" style="border-radius: 50%;">
           </ion-thumbnail>
