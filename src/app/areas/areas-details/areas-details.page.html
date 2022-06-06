@@ -34,7 +34,7 @@
         <a *ngIf="area.creator === me._id" [routerLink]="['/users/me']">{{creator.username}}</a>
         <a *ngIf="area.creator !== me._id" [routerLink]="['/users', area.creator]">{{creator.username}}</a>
       </ion-label>
-      <ion-button *ngIf="area.mine" color="primary" [routerLink]="['/events', area._id, 'edit']">
+      <ion-button *ngIf="area.mine" color="primary" [routerLink]="['/areas', area._id, 'edit']">
         <ion-icon style="font-size: 14px; padding-left: 5px;" name="create-outline" slot="start"></ion-icon>
         Editar área
       </ion-button>

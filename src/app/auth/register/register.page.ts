@@ -70,9 +70,11 @@ export class RegisterPage implements OnInit {
           message: `Bienvenid@ ${this.user.name}!`
         })
       ).present();
-      this.resetForm();
       this.authService.login(this.user.username, this.user.password).subscribe(
-        () => this.router.navigate(['/areas']),
+        () => {
+          this.resetForm();
+          this.router.navigate(['/areas']);
+      },
         async (error) => {
           (
             await this.alertCtrl.create({
