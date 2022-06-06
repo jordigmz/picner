@@ -67,14 +67,10 @@ export class ProfilePage implements OnInit, AfterViewInit {
       });
       await modal.present();
       const result = await modal.onDidDismiss();
-      if (result.data && result.data.user.name && result.data.user.email) {
-        this.user.name = result.data.user.name;
-        this.user.email = result.data.user.email;
+      if (result.data && result.data.name && result.data.email) {
+        this.user.name = result.data.name;
+        this.user.email = result.data.email;
       }
-
-      this.usersService.getUser().subscribe((user) => {
-        this.user = user;
-      });
     }
   }
 

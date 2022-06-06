@@ -39,8 +39,8 @@ export class AreasFormPage implements OnInit, AfterViewInit {
     email: '',
     password: '',
     avatar: '',
-    lat: 38.381783,
-    lng: -0.778259,
+    lat: 0,
+    lng: 0,
     guardados: [],
     sos: 112
   };
@@ -63,8 +63,8 @@ export class AreasFormPage implements OnInit, AfterViewInit {
       this.route.params.subscribe((param) => (this.idArea = param['id']));
       this.areasService.getArea(this.idArea).subscribe((area) => {
         this.area = area;
-        this.area.lng = area.lng as number;
-        this.area.lat = area.lat as number;
+        this.user.lng = area.lng;
+        this.user.lat = area.lat;
       });
     } else {
       this.usersService.getUser().subscribe((user) => {
@@ -85,9 +85,9 @@ export class AreasFormPage implements OnInit, AfterViewInit {
     });
   }
 
-  changeLngLat(lngLat: any) {
-    this.area.lng = +lngLat[0];
-    this.area.lat = +lngLat[1];
+  changeLngLat(marker: MarkerComponent) {
+    this.area.lng = +marker.markerInstance.getLngLat().lng;
+    this.area.lat = +marker.markerInstance.getLngLat().lat;
   }
 
   changePosition(result: Result) {

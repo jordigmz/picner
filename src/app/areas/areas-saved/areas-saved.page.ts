@@ -49,6 +49,14 @@ export class AreasSavedPage implements OnInit {
           handler: () => {
             this.user.guardados = this.user.guardados.filter(saved => saved !== id);
 
+            this.areas = [];
+
+            for(let idArea of this.user.guardados) {
+              this.areasService.getArea(idArea).subscribe((area) => {
+                this.areas.push(area);
+              });
+            }
+
             this.usersService.editUser(this.user).subscribe(
               async () => {
                 (await this.toast.create({

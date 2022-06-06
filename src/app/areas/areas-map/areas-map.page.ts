@@ -13,7 +13,7 @@ import { AreasService } from '../services/areas.service';
   templateUrl: './areas-map.page.html',
   styleUrls: ['./areas-map.page.scss'],
 })
-export class AreasMapPage implements OnInit, AfterViewInit {
+export class AreasMapPage implements AfterViewInit {
   @ViewChild(MapComponent) mapComp: MapComponent;
   user: User = {
     name: '',
@@ -35,7 +35,7 @@ export class AreasMapPage implements OnInit, AfterViewInit {
     private usersService: UsersService
   ) {}
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.usersService.getUser().subscribe((user) => {
       this.user = user;
     });

@@ -40,6 +40,6 @@ export class NameModalComponent implements OnInit {
   }
 
   close() {
-    this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss(this.user);
   }
 }
