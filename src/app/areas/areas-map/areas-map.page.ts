@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-shadow */
-import { AfterViewInit, Component, OnChanges, OnInit, ViewChild } from '@angular/core';
-import { NavController, PopoverController } from '@ionic/angular';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
 import { MapComponent } from 'ngx-mapbox-gl';
 import { HeaderPopoverComponent } from 'src/app/components/header-popover/header-popover.component';
 import { User } from 'src/app/users/interfaces/user';
@@ -41,7 +41,7 @@ export class AreasMapPage implements AfterViewInit {
     });
 
     this.areasService.getAreas().subscribe((areas) => {
-      this.areas = this.areas.concat(areas);
+      this.areas = areas;
     });
   }
 

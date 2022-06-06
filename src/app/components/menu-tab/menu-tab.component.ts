@@ -8,17 +8,18 @@ import { UsersService } from 'src/app/users/services/users.service';
   templateUrl: './menu-tab.component.html',
   styleUrls: ['./menu-tab.component.scss'],
 })
-export class MenuTabComponent implements OnInit {
-  user: User;
+export class MenuTabComponent {
+  user: User = {} as User;
   constructor(private alertController: AlertController, private usersService: UsersService) { }
 
-  ngOnInit() {
+  emergencyCall() {
     this.usersService.getUser().subscribe((user) => {
       this.user = user;
+      this.emergencyCallAlert();
     });
   }
 
-  async emergencyCall() {
+  async emergencyCallAlert() {
     const alert = await this.alertController.create({
       cssClass: 'emergencyAlert',
       header: '¿Necesitas ayuda?',

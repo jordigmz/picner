@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { NavigationControl } from 'mapbox-gl';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
@@ -13,8 +11,7 @@ export class HeaderPopoverComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private alertController: AlertController,
-    private router: Router
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {}

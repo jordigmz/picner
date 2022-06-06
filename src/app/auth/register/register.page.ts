@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Camera, CameraSource, CameraResultType } from '@capacitor/camera';
 import {
   ToastController,
-  NavController,
   AlertController,
 } from '@ionic/angular';
 import { User } from 'src/app/users/interfaces/user';

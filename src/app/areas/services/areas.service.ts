@@ -4,22 +4,18 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
-import { Area, AreaResponse } from '../interfaces/areas';
-import { Comments } from '../interfaces/comments';
-
+import { Area, AreaResponse, AreasResponse } from '../interfaces/areas';
 @Injectable({
   providedIn: 'root'
 })
 export class AreasService {
-  readonly areaURL = 'areas';
   constructor(private http: HttpClient) { }
 
-  getAreas(): Observable<any[]> {
+  getAreas(): Observable<Area[]> {
     let options = {
       headers: new HttpHeaders().set('Authoritation', 'Bearer ' + localStorage.getItem('accessToken'))
     };
-    return this.http.get<any>(this.areaURL, options).pipe(
+    return this.http.get<any>('areas', options).pipe(
       map((resp) => resp),
       catchError((resp: HttpErrorResponse) =>
         throwError(
@@ -29,7 +25,7 @@ export class AreasService {
     );
   }
 
-  getArea(id: string): Observable<any> {
+  getArea(id: string): Observable<Area> {
     let options = {
       headers: new HttpHeaders().set('Authoritation', 'Bearer ' + localStorage.getItem('accessToken'))
     };
@@ -44,7 +40,7 @@ export class AreasService {
   }
 
   addArea(area: Area): Observable<Area> {
-    return this.http.post<any>(`areas`, area).pipe(
+    return this.http.post<AreaResponse>(`areas`, area).pipe(
       map(resp => resp.area)
     );
   }
@@ -56,24 +52,6 @@ export class AreasService {
   }
 
   deleteArea(idArea: string): Observable<void> {
-    return this.http.delete(`${this.areaURL}/${idArea}`).pipe(map(() => null));
-  }
-
-  addComment(idArea: string, comment: string): Observable<Comments> {
-    return this.http.post<{ comment: Comments }>(`${this.areaURL}/${idArea}/comments`, { text: comment }).pipe(
-      map(resp => {
-        resp.comment.user.avatar = environment.baseUrl + '/' + resp.comment.user.avatar;
-        return resp.comment;
-      })
-    );
-  }
-
-  getComments(idArea: string): Observable<Comments[]> {
-    return this.http.get<{ comments: Comments[] }>(`${this.areaURL}/${idArea}/comments`).pipe(
-      map(resp => resp.comments.map(c => {
-        c.user.avatar = environment.baseUrl + '/' + c.user.avatar;
-        return c;
-      }))
-    );
+    return this.http.delete(`areas/${idArea}`).pipe(map(() => null));
   }
 }

@@ -74,11 +74,4 @@ export class AreasSavedPage implements OnInit {
     });
     alert.present();
   }
-
-  refresh(event: Event) {
-    console.log(event);
-    setTimeout(() => {
-      (event.target as HTMLIonRefresherElement).complete();
-    }, 2000);
-  }
 }

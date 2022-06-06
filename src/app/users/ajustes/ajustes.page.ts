@@ -36,7 +36,6 @@ export class AjustesPage implements OnInit {
   }
 
   changeSOS() {
-    console.log(this.me);
     this.me.sos = +this.me.sos;
     this.usersService.editUser(this.me).subscribe(
       async () => {

@@ -8,20 +8,13 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
   username = '';
   password = '';
   user = null;
   accessToken = '';
 
   constructor(private platform: Platform, private authService: AuthService, private router: Router, private alertCtrl: AlertController) { }
-
-  async ngOnInit() {
-    /*const resp = await FacebookLogin.getCurrentAccessToken() as FacebookLoginResponse;
-    if (resp.accessToken) {
-      this.accessToken = resp.accessToken.token;
-    }*/
-  }
 
   login() {
     this.authService
@@ -40,23 +33,7 @@ export class LoginPage implements OnInit {
       );
   }
 
-  /*async loginGoogle() {
-    try {
-      this.user = await GoogleAuth.signIn();
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
-  async loginFacebook() {
-    const resp = await FacebookLogin.login({ permissions: ['email'] }) as FacebookLoginResponse;
-    if (resp.accessToken) {
-      this.accessToken = resp.accessToken.token;
-    }
-  }*/
-
   async logout() {
-    //await FacebookLogin.logout();
     this.accessToken = '';
   }
 }

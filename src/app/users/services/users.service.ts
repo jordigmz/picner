@@ -12,7 +12,7 @@ import { User } from '../interfaces/user';
 export class UsersService {
   constructor(private http: HttpClient) { }
 
-  getUser(id?: string): Observable<any> {
+  getUser(id?: string): Observable<User> {
     let options = {
       headers: new HttpHeaders().set('Authoritation', 'Bearer ' + localStorage.getItem('accessToken'))
     };
