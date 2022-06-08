@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Geolocation } from '@capacitor/geolocation';
@@ -114,28 +114,48 @@ export class AreasFormPage implements OnInit {
   }
 
   async canDeactivate() {
-    const alert = await this.alertCrl.create({
-      header: '¿Estás seguro de que quieres salir?',
-      message: 'Se perderán todos los cambios',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel'
-        },
-        {
-          text: 'Aceptar',
-          handler: () => {
-            this.nav.navigateBack(['/areas']);
+    /*
+     * Dado que NgForm es undefined no se puede acceder a sus propiedades (pristine o dirty),
+     * por tanto, el alert salta incluso si no se modifica el formulario.
+    */
+    if (this.router.url.includes('edit') && !this.posted) {
+      const alert = await this.alertCrl.create({
+        header: 'Se perderán todos los cambios',
+        message: '¿Quieres guardar antes de salir?',
+        buttons: [
+          {
+            text: 'Aceptar',
+            role: 'goBack',
+            handler: () => {
+              this.uploadArea();
+            }
+          },
+          {
+            text: 'Salir',
+            role: 'goBack'
+          },
+          {
+            text: 'Cancelar',
+            role: 'cancel'
           }
-        }
-      ]
-    });
+        ]
+      });
+      await alert.present();
+
+      const data = await alert.onDidDismiss();
+      if (data.role === 'goBack') {
+        return true;
+      }
+    } else {
+      return true;
+    }
   }
 
   uploadArea() {
     if (this.router.url.includes('edit')) {
       this.areasService.editArea(this.area).subscribe(
         async (ev) => {
+          this.posted = true;
           (
             await this.toastCtrl.create({
               duration: 1200,
