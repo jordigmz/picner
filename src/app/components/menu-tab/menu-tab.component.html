@@ -3,7 +3,7 @@
     <ion-grid class="ion-text-center">
       <ion-row>
         <ion-col>
-          <ion-button [routerLink]="['/areas/guardado']" [routerDirection]="'root'">
+          <ion-button [routerLink]="['/areas/guardado']" [routerDirection]="'forward'">
             <ion-icon slot="icon-only" name="bookmark-outline"></ion-icon>
           </ion-button>
         </ion-col>
@@ -19,7 +19,7 @@
   </ion-buttons>
 </ion-toolbar>
 <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-  <ion-fab-button [routerLink]="['/areas/add']" [routerDirection]="'root'">
+  <ion-fab-button [routerLink]="['/areas/add']" [routerDirection]="'forward'">
     <ion-icon name="add-sharp" id="btnNewArea"></ion-icon>
   </ion-fab-button>
 </ion-fab>

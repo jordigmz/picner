@@ -2,7 +2,8 @@
   <ion-toolbar>
     <ion-buttons slot="end">
       <ion-button id="nested-button">
-        <ion-img [src]="user.avatar" id="avatarHeader"></ion-img>
+        <ion-img *ngIf="user.avatar" [src]="user.avatar" id="avatarHeader"></ion-img>
+        <ion-spinner *ngIf="!user.avatar" name="dots"></ion-spinner>
       </ion-button>
     </ion-buttons>
     <div id="logoHeader"></div>

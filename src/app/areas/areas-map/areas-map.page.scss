@@ -3,17 +3,24 @@ mgl-map {
   width: 100% !important;
 }
 
+@media (min-height: 851px) {
+  mgl-map {
+    min-height: 727px !important;
+  }
+}
+
 #logoHeader {
-  background-image: url('/assets/icon/logo-light.png');
-  background-position:center center;
-  background-repeat:no-repeat;
-  height: 56px;
-  width: 155px;
+  background-image: url('/assets/icon/logo-dark.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 32px !important;
+  width: 130px !important;
+  margin-left: 10px !important;
 }
 
 @media (prefers-color-scheme: dark) {
   #logoHeader {
-    background-image: url('/assets/icon/logo-dark.png');
+    background-image: url('/assets/icon/logo-light.png');
   }
 }
 

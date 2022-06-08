@@ -14,11 +14,11 @@
     <ion-list>
       <ion-item>
         <ion-label position="floating">Contacto de emergencia (SOS)</ion-label>
-        <ion-input name="sos" required [(ngModel)]="me.sos" #sosModel="ngModel"></ion-input>
+        <ion-input name="sos" required [(ngModel)]="me.sos" pattern="[0-9]+$" #sosModel="ngModel"></ion-input>
         <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="sosModel.dirty && sosModel.valid"></ion-icon>
       </ion-item>
     </ion-list>
-    <ion-button type="submit" color="success" expand="block">
+    <ion-button type="submit" color="success" expand="block" [disabled]="sosForm.invalid || !me.sos">
       <ion-icon name="paper" slot="add-circle"></ion-icon>
       Guardar
     </ion-button>

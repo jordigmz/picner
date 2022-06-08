@@ -28,7 +28,7 @@ export class AreasFormPage implements OnInit {
     lat: 38.408131,
     lng: -0.792284,
     creator: '',
-    address: 'Selecciona una ubicación en el mapa'
+    address: 'Selecciona una dirección en el mapa'
   };
 
   user: User = {
@@ -123,7 +123,7 @@ export class AreasFormPage implements OnInit {
       lat: 0,
       lng: 0,
       creator: '',
-      address: 'Selecciona una ubicación en el mapa'
+      address: 'Selecciona una dirección en el mapa'
     };
     this.imageName = '';
   }

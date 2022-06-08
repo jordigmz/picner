@@ -59,11 +59,15 @@ export class AreasSavedPage implements OnInit {
           handler: () => {
             this.user.guardados = this.user.guardados.filter(saved => saved !== id);
 
-            this.areas = [];
+            this.areasSaved = [];
 
             for(let idArea of this.user.guardados) {
               this.areasService.getArea(idArea).subscribe((area) => {
-                this.areas.push(area);
+                if(area) {
+              this.areasSaved.push(area);
+            } else {
+              this.user.guardados = this.user.guardados.filter(saved => saved !== idArea);
+            }
               });
             }
 
