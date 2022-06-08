@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AreaIdActivateGuard } from './area-id-activate.guard';
+import { AreaIdGuard } from './area-id.guard';
 
-describe('AreaIdActivateGuard', () => {
-  let guard: AreaIdActivateGuard;
+describe('AreaIdGuard', () => {
+  let guard: AreaIdGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    guard = TestBed.inject(AreaIdActivateGuard);
+    guard = TestBed.inject(AreaIdGuard);
   });
 
   it('should be created', () => {

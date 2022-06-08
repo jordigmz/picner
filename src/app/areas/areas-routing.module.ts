@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LeavePageGuard } from '../guards/leave-page.guard';
+import { AreaIdGuard } from './guards/area-id.guard';
 
 const routes: Routes = [
   {
@@ -12,11 +14,13 @@ const routes: Routes = [
   },
   {
     path: 'details/:id',
-    loadChildren: () => import('./areas-details/areas-details.module').then(m => m.AreasDetailsPageModule)
+    loadChildren: () => import('./areas-details/areas-details.module').then(m => m.AreasDetailsPageModule),
+    canActivate: [AreaIdGuard]
   },
   {
     path: ':id/edit',
-    loadChildren: () => import('./areas-form/areas-form.module').then(m => m.AreasFormPageModule)
+    loadChildren: () => import('./areas-form/areas-form.module').then(m => m.AreasFormPageModule),
+    canActivate: [AreaIdGuard]
   },
   {
     path: 'guardado',

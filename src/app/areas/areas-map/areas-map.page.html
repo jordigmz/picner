@@ -13,17 +13,19 @@
 <app-header-popover></app-header-popover>
 
 <ion-content>
-  <mgl-map #map [style]="'mapbox://styles/mapbox/streets-v11'" [zoom]="[14]" [center]="[user.lng, user.lat]" (mapLoad)="map.mapInstance.resize()">
-    <mgl-marker #marker [lngLat]="[user.lng, user.lat]">
-      <div class="marker"><ion-icon name="man" class="youHere"></ion-icon></div>
-    </mgl-marker>
-    <mgl-popup [marker]="marker">
-      Estás aquí
-    </mgl-popup>
-    <mgl-marker *ngFor="let area of areas" [lngLat]="[area.lng, area.lat]">
-      <div [routerLink]="['/areas/details/', area._id]" [routerDirection]="'forward'" class="marker"><ion-icon name="location-sharp" class="areaMarker"></ion-icon></div>
-    </mgl-marker>
-  </mgl-map>
+  <div class="container">
+    <mgl-map #map [style]="'mapbox://styles/mapbox/streets-v11'" [zoom]="[14]" [center]="[user.lng, user.lat]" (mapLoad)="map.mapInstance.resize()">
+      <mgl-marker #marker [lngLat]="[user.lng, user.lat]">
+        <div class="marker"><ion-icon name="man" class="youHere"></ion-icon></div>
+      </mgl-marker>
+      <mgl-popup [marker]="marker">
+        Estás aquí
+      </mgl-popup>
+      <mgl-marker *ngFor="let area of areas" [lngLat]="[area.lng, area.lat]">
+        <div [routerLink]="['/areas/details/', area._id]" [routerDirection]="'forward'" class="marker"><ion-icon name="location-sharp" class="areaMarker"></ion-icon></div>
+      </mgl-marker>
+    </mgl-map>
+  </div>
 </ion-content>
 
 <app-menu-tab></app-menu-tab>

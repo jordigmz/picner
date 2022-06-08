@@ -6,7 +6,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Geolocation } from '@capacitor/geolocation';
-import { NavController, ToastController } from '@ionic/angular';
+import { AlertController, NavController, ToastController } from '@ionic/angular';
 import { MarkerComponent } from 'ngx-mapbox-gl';
 import { Result } from 'ngx-mapbox-gl-geocoder-control';
 import { User } from 'src/app/users/interfaces/user';
@@ -53,7 +53,8 @@ export class AreasFormPage implements OnInit {
     private areasService: AreasService,
     private usersService: UsersService,
     private toastCtrl: ToastController,
-    private nav: NavController
+    private nav: NavController,
+    private alertCrl: AlertController
   ) { }
 
   async ngOnInit() {
@@ -88,22 +89,6 @@ export class AreasFormPage implements OnInit {
     this.area.address = result.place_name;
   }
 
-  canDeactivate() {
-    if (this.router.url.includes('edit')) {
-      return (
-        this.areasForm.pristine ||
-        this.posted ||
-        this.uploadArea()
-      );
-    } else {
-      return (
-        this.areasForm.pristine ||
-        this.posted ||
-        confirm('¿Quieres abandonar la página?. Se perderán todos los cambios.')
-      );
-    }
-  }
-
   changeImage(fileInput: HTMLInputElement) {
     if (!fileInput.files || fileInput.files.length === 0) {
       return;
@@ -126,6 +111,25 @@ export class AreasFormPage implements OnInit {
       address: 'Selecciona una dirección en el mapa'
     };
     this.imageName = '';
+  }
+
+  async canDeactivate() {
+    const alert = await this.alertCrl.create({
+      header: '¿Estás seguro de que quieres salir?',
+      message: 'Se perderán todos los cambios',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            this.nav.navigateBack(['/areas']);
+          }
+        }
+      ]
+    });
   }
 
   uploadArea() {

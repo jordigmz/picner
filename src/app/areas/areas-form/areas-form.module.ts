@@ -5,12 +5,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { NgxMapboxGlGeocoderControlModule } from 'ngx-mapbox-gl-geocoder-control';
+import { LeavePageGuard } from 'src/app/guards/leave-page.guard';
 import { AreasFormPage } from './areas-form.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: AreasFormPage
+    component: AreasFormPage,
+    canDeactivate: [LeavePageGuard]
   }
 ];
 

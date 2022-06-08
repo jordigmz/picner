@@ -1,12 +1,16 @@
-mgl-map {
+ion-content {
+  --overflow: hidden !important;
+}
+
+.container {
   height: 100% !important;
   width: 100% !important;
 }
 
-@media (min-height: 851px) {
-  mgl-map {
-    min-height: 727px !important;
-  }
+mgl-map {
+  display: inline-block !important;
+  height: 110% !important;
+  width: 100% !important;
 }
 
 #logoHeader {
