@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm, ReactiveFormsModule } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Geolocation } from '@capacitor/geolocation';
@@ -45,6 +45,7 @@ export class AreasFormPage implements OnInit {
 
   imageName = '';
   posted = false;
+  edited = false;
 
   @ViewChild('areasForm') areasForm!: NgForm;
   constructor(
@@ -113,12 +114,13 @@ export class AreasFormPage implements OnInit {
     this.imageName = '';
   }
 
+  isEdited() {
+    this.edited = true;
+  }
+
   async canDeactivate() {
-    /*
-     * Dado que NgForm es undefined no se puede acceder a sus propiedades (pristine o dirty),
-     * por tanto, el alert salta incluso si no se modifica el formulario.
-    */
-    if (this.router.url.includes('edit') && !this.posted) {
+   console.log(this.areasForm);
+    if (this.router.url.includes('edit') && !this.posted && this.edited) {
       const alert = await this.alertCrl.create({
         header: 'Se perderán todos los cambios',
         message: '¿Quieres guardar antes de salir?',
@@ -219,6 +221,7 @@ export class AreasFormPage implements OnInit {
     });
 
     this.area.image = photo.dataUrl;
+    this.edited = true;
   }
 
   async pickFromGallery() {
@@ -231,5 +234,6 @@ export class AreasFormPage implements OnInit {
     });
 
     this.area.image = photo.dataUrl;
+    this.edited = true;
   }
 }

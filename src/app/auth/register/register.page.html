@@ -1,35 +1,50 @@
 <ion-content class="ion-padding">
   <div id="logoBrand"></div>
-  <form #registerForm="ngForm" (ngSubmit)="register()">
+  <form #registerForm="ngForm" (ngSubmit)="register()" novalidate>
     <ion-list>
       <ion-item>
         <ion-label position="floating">Nombre</ion-label>
-        <ion-input name="name" required [(ngModel)]="user.name" #nameModel="ngModel"></ion-input>
+        <ion-input name="name" required [(ngModel)]="user.name" #nameModel="ngModel" minlength="3"></ion-input>
         <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="nameModel.dirty && nameModel.valid">
         </ion-icon>
       </ion-item>
+      <ion-label class="isInvalid" *ngIf="nameModel.errors?.['required']">
+        El nombre no puede quedar vacío.
+      </ion-label>
+      <ion-label class="isInvalid" *ngIf="nameModel.errors?.['minlength']">
+        Debes introducir al menos {{nameModel.errors?.['minlength'].requiredLength}} caracteres.
+      </ion-label>
       <div ngModelGroup="mailGroup" #mailGroupModel="ngModelGroup" appEqualMail="email, email2">
         <ion-item>
           <ion-label position="floating">Correo electrónico</ion-label>
           <ion-input type="text" name="email" required [(ngModel)]="user.email" #emailModel="ngModel"
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder=" @"></ion-input>
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" minlength="3" placeholder=" @"></ion-input>
           <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="emailModel.dirty && emailModel.valid">
           </ion-icon>
         </ion-item>
+        <ion-label class="isInvalid" *ngIf="emailModel.invalid">
+          Debes introducir un email válido.
+        </ion-label>
         <ion-item>
           <ion-label position="floating">Confirmar correo</ion-label>
           <ion-input type="text" name="email2" required [(ngModel)]="email2" #email2Model="ngModel"
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder=" @"></ion-input>
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" minlength="3" placeholder=" @"></ion-input>
           <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="email2Model.dirty && email2Model.valid">
           </ion-icon>
         </ion-item>
+        <ion-label class="isInvalid" *ngIf="email2Model.invalid">
+          Debes introducir un email válido.
+        </ion-label>
       </div>
       <ion-item>
         <ion-label position="floating">Usuario</ion-label>
-        <ion-input name="username" required [(ngModel)]="user.username" #usernameModel="ngModel" pattern="[a-zA-Z0-9._-]+$" placeholder="👤"></ion-input>
+        <ion-input name="username" required [(ngModel)]="user.username" #usernameModel="ngModel" pattern="[a-zA-Z0-9._-]+$" minlength="3" placeholder="👤"></ion-input>
         <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="usernameModel.dirty && usernameModel.valid">
         </ion-icon>
       </ion-item>
+      <ion-label class="isInvalid" *ngIf="usernameModel.invalid">
+        Debes introducir un usuario válido.
+      </ion-label>
       <ion-item>
         <ion-label position="floating">Contraseña</ion-label>
         <ion-input type="password" name="password" minlength="4" required [(ngModel)]="user.password"
@@ -37,6 +52,12 @@
         <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="passModel.dirty && passModel.valid">
         </ion-icon>
       </ion-item>
+      <ion-label class="isInvalid" *ngIf="passModel.errors?.['required']">
+        La contraseña no puede quedar vacía.
+      </ion-label>
+      <ion-label class="isInvalid" *ngIf="passModel.errors?.['minlength']">
+        Debes introducir al menos {{passModel.errors?.['minlength'].requiredLength}} caracteres.
+      </ion-label>
       <ion-item>
         <ion-label position="inset">Foto de perfil</ion-label>
         <ion-button color="secondary" (click)="takePhoto()">

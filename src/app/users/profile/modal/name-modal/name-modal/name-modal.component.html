@@ -15,20 +15,21 @@
       {{user.name}}, actualiza aquí la información de la cuenta
     </ion-list-header>
   </ion-list>
-  <form>
+  <form #infoForm="ngForm" novalidate>
     <ion-item>
       <ion-label position="floating">Nombre</ion-label>
-      <ion-input name="name" required [(ngModel)]="user.name" #nameModel="ngModel"></ion-input>
+      <ion-input name="name" required [(ngModel)]="user.name" #nameModel="ngModel" minlength="3"></ion-input>
       <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="nameModel.dirty && nameModel.valid">
       </ion-icon>
-      <hr>
+    </ion-item>
+    <ion-item>
       <ion-label position="floating">Correo electrónico</ion-label>
       <ion-input type="text" name="email" required [(ngModel)]="user.email" #emailModel="ngModel"
-        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></ion-input>
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" minlength="3"></ion-input>
       <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="emailModel.dirty && emailModel.valid">
       </ion-icon>
     </ion-item>
-    <ion-button color="success" expand="block" (click)="editNameAndEmail()" class="ion-margin-top">
+    <ion-button color="success" expand="block" (click)="editNameAndEmail()" class="ion-margin-top" [disabled]="infoForm.invalid">
       <ion-label>Guardar cambios</ion-label>
     </ion-button>
   </form>
