@@ -17,6 +17,9 @@ export class AreasSavedPage implements OnInit {
 
   areasSaved: Area[] = [];
 
+  search = '';
+  orderBy = '';
+
   constructor(private usersService: UsersService,
     private areasService: AreasService,
     private alertCrl: AlertController,
@@ -88,4 +91,8 @@ export class AreasSavedPage implements OnInit {
     });
     alert.present();
   }
-}
+
+  orderByTitle(order: string) {
+    this.orderBy = order;
+  }
+ }

@@ -26,12 +26,25 @@
     </ion-grid>
     <div *ngIf="areasSaved.length > 0">
       <ion-list>
-        <ion-item *ngFor="let area of areasSaved">
+        <ion-item lines="none">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="4" style="display: flex; align-items: center;">
+                <ion-button size="small" (click)="orderByTitle('title')">Ordenar</ion-button>
+              </ion-col>
+              <ion-col size="8">
+                <ion-searchbar animated placeholder="Buscar" [(ngModel)]="search"></ion-searchbar>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <ion-item *ngFor="let area of (areasSaved | areasFilter: search) | orderBy: orderBy">
           <ion-thumbnail slot="start" [routerLink]="['/areas/details/', area._id]" [routerDirection]="'forward'">
-            <img [src]="area.image" style="border-radius: 50%;">
+            <img [src]="area.image" style="border-radius: 12px;">
           </ion-thumbnail>
-          <ion-label text-wrap [routerLink]="['/areas/details/', area._id]" [routerDirection]="'forward'">
+          <ion-label [routerLink]="['/areas/details/', area._id]" [routerDirection]="'forward'" class="ellipsis">
             <h2>{{area.name}}</h2>
+            <p>{{area.description}}</p>
           </ion-label>
           <ion-button slot="end" fill="clear" color="danger" (click)="delete(area._id)">
             <ion-icon slot="icon-only" name="trash-outline"></ion-icon>

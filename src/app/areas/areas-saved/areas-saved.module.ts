@@ -6,6 +6,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { AreasSavedPage } from './areas-saved.page';
 import { RouterModule, Routes } from '@angular/router';
+import { OrderByPipe } from '../pipes/order-by/order-by.pipe';
+import { AreasFilterPipe } from '../pipes/areas-filter/areas-filter.pipe';
 
 const routes: Routes = [
   {
@@ -21,6 +23,10 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [AreasSavedPage]
+  declarations: [
+    AreasSavedPage,
+    OrderByPipe,
+    AreasFilterPipe
+  ]
 })
 export class AreasSavedPageModule {}

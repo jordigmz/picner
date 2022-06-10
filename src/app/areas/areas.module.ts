@@ -14,7 +14,6 @@ import { AreasRoutingModule } from './areas-routing.module';
     AreasRoutingModule,
     NgxMapboxGLModule,
     NgxMapboxGlGeocoderControlModule
-  ],
-  declarations: [],
+  ]
 })
 export class AreasModule {}
