@@ -21,10 +21,6 @@
     <ion-card-content class="ion-padding-bottom">
       <ion-card-title style="padding-bottom: 5px;">{{area.name}}</ion-card-title>
       <ion-card-subtitle *ngIf="area.address !== 'Selecciona una ubicación en el mapa'"><b>Dirección:</b> {{area.address}}</ion-card-subtitle>
-      <ion-button *ngIf="area.mine" expand="block" color="danger" class="ion-margin-top" (click)="delete()">
-        <ion-icon name="trash-outline" slot="start"></ion-icon>
-        <ion-label>Eliminar área</ion-label>
-      </ion-button>
       <p class="descArea">{{area.description}}</p>
     </ion-card-content>
     <ion-item lines="none" *ngIf="creator">
@@ -36,7 +32,11 @@
       </ion-label>
       <ion-button *ngIf="area.mine" color="primary" [routerLink]="['/areas', area._id, 'edit']">
         <ion-icon style="font-size: 14px; padding-left: 5px;" name="create-outline" slot="start"></ion-icon>
-        Editar área
+        Editar
+      </ion-button>
+      <ion-button *ngIf="area.mine" color="danger" (click)="delete()">
+        <ion-icon style="font-size: 14px; padding-left: 5px;" name="trash-outline" slot="start"></ion-icon>
+        <ion-label>Eliminar</ion-label>
       </ion-button>
     </ion-item>
   </ion-card>
