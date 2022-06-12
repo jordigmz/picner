@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@capacitor/storage';
-import { from, Observable, of, ReplaySubject } from 'rxjs';
+import { from, Observable, of, ReplaySubject, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { User } from 'src/app/users/interfaces/user';
 
@@ -35,7 +35,9 @@ export class AuthService {
   }
 
   register(user: User): Observable<void> {
-    return this.http.post('auth/register', user).pipe(map(() => null));
+    return this.http.post('auth/register', user).pipe(
+      map(() => null)
+    );
   }
 
   async logout(): Promise<void> {

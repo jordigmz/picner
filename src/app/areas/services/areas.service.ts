@@ -21,7 +21,8 @@ export class AreasService {
         throwError(
           () =>
             `Error getting areas. Status: ${resp.status}. Message: ${resp.message}`
-        ))
+        )
+      )
     );
   }
 
@@ -35,7 +36,8 @@ export class AreasService {
         throwError(
           () =>
             `Error getting the area. Status: ${resp.status}. Message: ${resp.message}`
-        ))
+        )
+      )
     );
   }
 

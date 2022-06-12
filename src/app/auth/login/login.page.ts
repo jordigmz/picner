@@ -14,7 +14,7 @@ export class LoginPage {
   user = null;
   accessToken = '';
 
-  constructor(private platform: Platform, private authService: AuthService, private router: Router, private alertCtrl: AlertController) { }
+  constructor(private authService: AuthService, private router: Router, private alertCtrl: AlertController) { }
 
   login() {
     this.authService

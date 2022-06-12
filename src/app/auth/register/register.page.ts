@@ -84,7 +84,16 @@ export class RegisterPage implements OnInit {
           ).present();
         }
       );
-    });
+    },
+    async (e) => {
+      (
+        await this.alertCtrl.create({
+          header: 'El usuario ya existe',
+          message: e.error.message,
+          buttons: ['Aceptar'],
+        })
+      ).present();
+  });
   }
 
   async takePhoto() {
