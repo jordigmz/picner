@@ -18,10 +18,10 @@
         <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="nameModel.dirty && nameModel.valid">
         </ion-icon>
       </ion-item>
-      <ion-label class="isInvalid" *ngIf="nameModel.errors?.['required']">
+      <ion-label class="isInvalid" *ngIf="nameModel.dirty && nameModel.errors?.['required']">
         El nombre no puede quedar vacío.
       </ion-label>
-      <ion-label class="isInvalid" *ngIf="nameModel.errors?.['minlength']">
+      <ion-label class="isInvalid" *ngIf="nameModel.dirty && nameModel.errors?.['minlength']">
         Debes introducir al menos {{nameModel.errors?.['minlength'].requiredLength}} caracteres.
       </ion-label>
       <ion-item>
@@ -30,10 +30,10 @@
         <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="descModel.dirty && descModel.valid">
         </ion-icon>
       </ion-item>
-      <ion-label class="isInvalid" *ngIf="descModel.errors?.['required']">
+      <ion-label class="isInvalid" *ngIf="descModel.dirty && descModel.errors?.['required']">
         La descripción no puede quedar vacía.
       </ion-label>
-      <ion-label class="isInvalid" *ngIf="descModel.errors?.['minlength']">
+      <ion-label class="isInvalid" *ngIf="descModel.dirty && descModel.errors?.['minlength']">
         Debes introducir al menos {{descModel.errors?.['minlength'].requiredLength}} caracteres.
       </ion-label>
       <ion-item>
@@ -47,7 +47,7 @@
           Galería
         </ion-button>
       </ion-item>
-      <ion-label class="isInvalid" *ngIf="!area.image">
+      <ion-label class="isInvalidImg" *ngIf="!area.image">
         Debes seleccionar una imagen.
       </ion-label>
       <ion-item *ngIf="area.image" lines="none"><ion-img [src]="area.image"></ion-img></ion-item>

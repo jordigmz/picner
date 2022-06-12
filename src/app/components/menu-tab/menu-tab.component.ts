@@ -28,16 +28,12 @@ export class MenuTabComponent {
         {
           text: 'No',
           role: 'cancel',
-          id: 'cancel-button',
-          handler: () => {
-            console.log('Cancela llamar al contacto de emergencia');
-          }
+          id: 'cancel-button'
         }, {
           text: 'Sí',
           cssClass: 'confirmSOS',
           id: 'confirm-button',
           handler: () => {
-            console.log('Confirma llamar al contacto de emergencia');
             window.open('tel:'+this.user.sos);
           }
         }

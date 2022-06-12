@@ -8,13 +8,13 @@
         <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="nameModel.dirty && nameModel.valid">
         </ion-icon>
       </ion-item>
-      <ion-label class="isInvalid" *ngIf="nameModel.errors?.['required']">
+      <ion-label class="isInvalid" *ngIf="nameModel.dirty && nameModel.errors?.['required']">
         El nombre no puede quedar vacío.
       </ion-label>
-      <ion-label class="isInvalid" *ngIf="nameModel.errors?.['minlength']">
+      <ion-label class="isInvalid" *ngIf="nameModel.dirty && nameModel.errors?.['minlength']">
         Debes introducir al menos {{nameModel.errors?.['minlength'].requiredLength}} caracteres.
       </ion-label>
-      <div ngModelGroup="mailGroup" #mailGroupModel="ngModelGroup" appEqualMail="email, email2">
+      <div ngModelGroup="mailGroup" #mailGroupModel="ngModelGroup" appEqualEmails="email, email2">
         <ion-item>
           <ion-label position="floating">Correo electrónico</ion-label>
           <ion-input type="text" name="email" required [(ngModel)]="user.email" #emailModel="ngModel"
@@ -22,7 +22,7 @@
           <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="emailModel.dirty && emailModel.valid">
           </ion-icon>
         </ion-item>
-        <ion-label class="isInvalid" *ngIf="emailModel.invalid">
+        <ion-label class="isInvalid" *ngIf="emailModel.dirty && emailModel.invalid">
           Debes introducir un email válido.
         </ion-label>
         <ion-item>
@@ -32,17 +32,20 @@
           <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="email2Model.dirty && email2Model.valid">
           </ion-icon>
         </ion-item>
-        <ion-label class="isInvalid" *ngIf="email2Model.invalid">
+        <ion-label class="isInvalid" *ngIf="email2Model.dirty && email2Model.invalid">
           Debes introducir un email válido.
         </ion-label>
       </div>
+      <ion-label class="isInvalid" *ngIf="emailModel.valid && email2Model.valid && mailGroupModel.invalid">
+        Los correos no coinciden.
+      </ion-label>
       <ion-item>
         <ion-label position="floating">Usuario</ion-label>
         <ion-input name="username" required [(ngModel)]="user.username" #usernameModel="ngModel" pattern="[a-zA-Z0-9._-]+$" minlength="3" placeholder="👤"></ion-input>
         <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="usernameModel.dirty && usernameModel.valid">
         </ion-icon>
       </ion-item>
-      <ion-label class="isInvalid" *ngIf="usernameModel.invalid">
+      <ion-label class="isInvalid" *ngIf="usernameModel.dirty && usernameModel.invalid">
         Debes introducir un usuario válido.
       </ion-label>
       <ion-item>
@@ -52,10 +55,10 @@
         <ion-icon name="checkmark-circle" slot="end" color="success" *ngIf="passModel.dirty && passModel.valid">
         </ion-icon>
       </ion-item>
-      <ion-label class="isInvalid" *ngIf="passModel.errors?.['required']">
+      <ion-label class="isInvalid" *ngIf="passModel.dirty && passModel.errors?.['required']">
         La contraseña no puede quedar vacía.
       </ion-label>
-      <ion-label class="isInvalid" *ngIf="passModel.errors?.['minlength']">
+      <ion-label class="isInvalid" *ngIf="passModel.dirty && passModel.errors?.['minlength']">
         Debes introducir al menos {{passModel.errors?.['minlength'].requiredLength}} caracteres.
       </ion-label>
       <ion-item>
@@ -88,7 +91,7 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-button type="submit" color="success" expand="block" [disabled]="registerForm.invalid || !user.avatar">
+          <ion-button type="submit" color="success" expand="block" [disabled]="registerForm.invalid || !user.avatar || mailGroupModel.invalid">
             <ion-icon name="person-add-outline" slot="start"></ion-icon>
             Registrarse
           </ion-button>

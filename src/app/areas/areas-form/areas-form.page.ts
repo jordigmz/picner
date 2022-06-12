@@ -119,7 +119,6 @@ export class AreasFormPage implements OnInit {
   }
 
   async canDeactivate() {
-   console.log(this.areasForm);
     if (this.router.url.includes('edit') && !this.posted && this.edited) {
       const alert = await this.alertCrl.create({
         header: 'Se perderán todos los cambios',

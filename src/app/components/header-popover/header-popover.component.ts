@@ -25,16 +25,12 @@ export class HeaderPopoverComponent implements OnInit {
         {
           text: 'Cancelar',
           role: 'cancel',
-          id: 'cancel-button',
-          handler: () => {
-            console.log('Cerrar sesión cancelado');
-          }
+          id: 'cancel-button'
         }, {
           text: 'Salir',
           cssClass: 'confirmSOS',
           id: 'confirm-button',
           handler: () => {
-            console.log('Confirma cerrar sesión');
             this.authService.logout();
           }
         }

@@ -14,7 +14,6 @@ export class AreaIdGuard implements CanActivate {
     if(route.paramMap.get('id').length === 24 && /^[A-Za-z0-9]*$/.test(route.paramMap.get('id'))) {
       return true;
     } else {
-      console.log('invalid id');
       return this.router.createUrlTree(['/areas']);
     }
   }
