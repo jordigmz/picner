@@ -43,6 +43,8 @@ export class AreasFormPage implements OnInit {
     sos: 112
   };
 
+  edit = false;
+
   imageName = '';
   posted = false;
   edited = false;
@@ -60,6 +62,7 @@ export class AreasFormPage implements OnInit {
 
   async ngOnInit() {
     if (this.router.url.includes('edit')) {
+      this.edit = true;
       this.route.params.subscribe((param) => (this.idArea = param['id']));
       this.areasService.getArea(this.idArea).subscribe((area) => {
         this.area = area;
