@@ -89,7 +89,7 @@ export class ProfilePage implements OnInit {
         quality: 90,
         height: 400,
         width: 400,
-        allowEditing: true,
+        allowEditing: false,
         resultType: CameraResultType.DataUrl,
       });
 
@@ -115,7 +115,7 @@ export class ProfilePage implements OnInit {
         source: CameraSource.Photos,
         height: 400,
         width: 400,
-        allowEditing: true,
+        allowEditing: false,
         resultType: CameraResultType.DataUrl,
       });
 

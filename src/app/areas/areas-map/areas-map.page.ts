@@ -7,6 +7,7 @@ import { User } from 'src/app/users/interfaces/user';
 import { UsersService } from 'src/app/users/services/users.service';
 import { Area } from '../interfaces/areas';
 import { AreasService } from '../services/areas.service';
+import { MapComponent } from 'ngx-mapbox-gl';
 
 @Component({
   selector: 'app-areas-map',
@@ -14,6 +15,8 @@ import { AreasService } from '../services/areas.service';
   styleUrls: ['./areas-map.page.scss'],
 })
 export class AreasMapPage {
+  @ViewChild(MapComponent) mapComp: MapComponent;
+
   user: User = {
     name: '',
     username: '',
@@ -49,6 +52,12 @@ export class AreasMapPage {
     this.areasService.getAreas().subscribe((areas) => {
       this.areas = areas;
     });
+
+    this.mapComp.mapLoad.subscribe(
+      () => {
+        this.mapComp.mapInstance.resize(); // Necessary for full height
+      }
+    );
   }
 
   async openPopover(ev: any) {

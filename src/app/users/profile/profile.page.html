@@ -25,7 +25,8 @@
       </ion-item>
     </div>
     <div id="divAvatar" class="ion-text-center">
-      <img class="avatarProfile" [src]="user.avatar">
+      <img class="avatarProfile" *ngIf="user.avatar" [src]="user.avatar">
+      <ion-spinner *ngIf="!user.avatar" name="dots"></ion-spinner>
     </div>
     <ion-card-header class="ion-text-center">
       <ion-card-title>{{user.name}}</ion-card-title>

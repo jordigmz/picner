@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://localhost:3000'
+  baseUrl: 'http://vps-c5ec60fc.vps.ovh.net:3000'
 };

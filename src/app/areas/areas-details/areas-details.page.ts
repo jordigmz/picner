@@ -109,9 +109,18 @@ export class AreasDetailsPage implements OnInit {
         {
           text: 'Aceptar',
           handler: () => {
-            this.areasService
-              .deleteArea(this.area._id)
-              .subscribe(() => this.nav.navigateBack(['/areas']));
+            this.areasService.deleteArea(this.area._id).subscribe(
+              async () => {
+                (await this.toast.create({
+                  duration: 1200,
+                  position: 'bottom',
+                  color: 'danger',
+                  icon: 'information-circle',
+                  message: 'Área eliminada.'
+                })).present();
+                this.nav.navigateBack(['/areas']);
+              }
+            );
           }
         }
       ]

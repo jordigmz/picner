@@ -14,7 +14,7 @@
 
 <ion-content>
   <div class="container">
-    <mgl-map #map [style]="'mapbox://styles/mapbox/streets-v11'" [zoom]="[13]" [center]="[user.lng, user.lat]" (mapLoad)="map.mapInstance.resize()">
+    <mgl-map #map [style]="'mapbox://styles/mapbox/streets-v11'" [zoom]="[13]" [center]="[user.lng, user.lat]" (mapLoad)="map.mapInstance.resize()" [trackResize]="false">
       <mgl-marker #marker [lngLat]="[user.lng, user.lat]">
         <div class="marker"><ion-icon name="man" class="youHere"></ion-icon></div>
       </mgl-marker>

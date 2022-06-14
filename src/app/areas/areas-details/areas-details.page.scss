@@ -11,3 +11,17 @@ a {
 img {
   width: 100% !important;
 }
+
+.avatarDetails {
+  height: 32px !important;
+  width: 32px !important;
+  object-fit: cover !important;
+}
+
+ion-avatar {
+  margin-right: 0 !important;
+}
+
+ion-fab {
+  margin-bottom: 40px !important;
+}

@@ -169,7 +169,7 @@ export class AreasFormPage implements OnInit {
               message: 'Se ha actualizado el área.',
             })
           ).present();
-          this.nav.navigateRoot(['/areas']);
+          this.nav.navigateBack(['/areas']);
         },
         async (error) =>
           (
@@ -196,7 +196,7 @@ export class AreasFormPage implements OnInit {
               message: '¡Nueva área publicada!',
             })
           ).present();
-          this.nav.navigateRoot(['/areas']);
+          this.nav.navigateBack(['/areas']);
         },
         async (error) =>
           (
@@ -218,7 +218,7 @@ export class AreasFormPage implements OnInit {
       quality: 90,
       height: 400,
       width: 400,
-      allowEditing: true,
+      allowEditing: false,
       resultType: CameraResultType.DataUrl,
     });
 
@@ -231,7 +231,7 @@ export class AreasFormPage implements OnInit {
       source: CameraSource.Photos,
       height: 400,
       width: 400,
-      allowEditing: true,
+      allowEditing: false,
       resultType: CameraResultType.DataUrl,
     });
 

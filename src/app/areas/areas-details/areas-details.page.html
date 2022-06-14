@@ -24,8 +24,8 @@
       <p class="descArea">{{area.description}}</p>
     </ion-card-content>
     <ion-item lines="none" *ngIf="creator">
-      <ion-avatar slot="start" *ngIf="area.creator === me._id" [routerLink]="['/users/me']"><img [src]="creator.avatar"></ion-avatar>
-      <ion-avatar slot="start" *ngIf="area.creator !== me._id" [routerLink]="['/users', area.creator]"><img [src]="creator.avatar"></ion-avatar>
+      <ion-avatar slot="start" *ngIf="area.creator === me._id" [routerLink]="['/users/me']"><img class="avatarDetails" *ngIf="creator.avatar" [src]="creator.avatar"><ion-spinner *ngIf="!creator.avatar" name="dots"></ion-spinner></ion-avatar>
+      <ion-avatar slot="start" *ngIf="area.creator !== me._id" [routerLink]="['/users', area.creator]"><img class="avatarDetails" *ngIf="creator.avatar" [src]="creator.avatar"><ion-spinner *ngIf="!creator.avatar" name="dots"></ion-spinner></ion-avatar>
       <ion-label>
         <a *ngIf="area.creator === me._id" [routerLink]="['/users/me']">{{creator.username}}</a>
         <a *ngIf="area.creator !== me._id" [routerLink]="['/users', area.creator]">{{creator.username}}</a>
